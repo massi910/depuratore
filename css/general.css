@@ -1,0 +1,82 @@
+/* general styles */
+
+body
+{margin: 0px;}
+.padding
+{padding: 18px;}
+.cnt-rel
+{position: relative;}
+.margin-side-100
+{
+    margin-left: 100px;
+    margin-right: 100px;
+}
+:root
+{--navBar-height: 0px;}
+
+/* 
+top header 
+*/
+.cnt-top-header
+{
+    padding-top: 15px;
+}
+.logo
+{
+    font-family: cursive;
+    color: black;
+    font-weight: bolder;
+    text-decoration:none;
+    font-size: 35px;
+}
+.top-header-info
+{
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    color: black;
+    right: 0;
+    bottom: 0;
+}
+
+/* 
+top navigation bar 
+*/
+#top-bar
+{
+    background-color: rgb(247, 247, 242);
+    z-index:1;
+    width: 100%;
+    box-sizing: border-box; /* include padding and border in the totoal width and height */
+}
+.top-bar-sticky
+{
+    position: fixed;
+    top:0;
+    width: 100%;
+}
+.top-bar-sticky + .content  /* selects all elements that are the adjacent siblings */
+{
+    padding-top: 70px;    /* to prevent sudden quick movement(from sticky func) */
+}
+.cnt-right
+{float: right;}
+.top-bar-item
+{
+    text-decoration: none;
+    font-size: x-large;
+    color: black;
+    padding: 10px;
+}
+.top-bar-item:hover
+{background-color: #ddd;}
+
+/*
+others
+*/
+
+.sticky-calc-card
+{
+    position: sticky;
+    top: var(--navBar-height);
+}
+
