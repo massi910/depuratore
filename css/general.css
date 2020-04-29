@@ -13,6 +13,8 @@ body
 }
 :root
 {--navBar-height: 0px;}
+.margin-top-10
+{margin-top: 10px;}
 
 /* 
 top header 

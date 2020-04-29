@@ -12,8 +12,6 @@ document.documentElement.style.setProperty('--navBar-height', navBarHeight + "px
 var calcCard = document.getElementById("calculator_card");
 
 
-
-
 ////////////////////// sticky calculator card effect
 function stickyCalcCard(sticky) 
 {
