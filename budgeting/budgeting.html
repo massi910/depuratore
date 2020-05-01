@@ -1,95 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preventivazione</title>
-    <link rel="stylesheet" href="/css/w3.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"">
     <link rel="stylesheet" href="/css/general.css">
-    
 </head>
+
 <body>
     <!-- top header -->
-    <div class="cnt-top-header padding">
-        <div class="cnt-rel">
-            <a class="logo" href="/home.html">Depuratore(logo)</a>
-            <div class="top-header-info w3 w3-hide-medium w3-hide-small">
-                depuratore sperimentale con filtri a sabbia
+    <div class="container-fluid bg-light">
+        <div class="row">
+            <div class="col-lg-6">
+                <a class="text-decoration-none logo" href="/home.html">Depuratore(logo)</a>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block d-lg-flex align-items-end flex-column default-padding">
+                <div class="mt-lg-auto">
+                    depuratore sperimentale con filtri a sabbia
+                </div>
             </div>
         </div>
     </div>
 
     <!-- top navigation bar -->
-    <div id="top-bar" class="padding">
-        <div class="">
-            <a href="/home.html" class="top-bar-item"> Home</a>
-            <!-- Float links to the right. (todo)Hide them on small screens -->
-            <div class="cnt-right w3-hide-small">
-                <a href="/about.html" class="top-bar-item">About</a>
-                <a href="/contact.html" class="top-bar-item">Contact</a>
+    <nav id="top-bar" class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/home.html">Home</a>
+                <a class="nav-item nav-link active" href="#">Preventivazione
+                    <span class="sr-only">(current)</span></a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="#">Info</a>
+                <a class="nav-item nav-link" href="#">Contatti</a>
             </div>
         </div>
-    </div>
+    </nav>
+
 
     <!-- content -->
-    <div class="w3-row margin-side-100 content">
-        <div class="w3-green w3-container w3-twothird padding">
-            <!-- todo -->
-            <div class="w3-container w3-teal margin-top-10" onclick="myFunction('Demo1')">
-                <h5>item 1</h5>
-                <p>information</p>
-            </div>
-            <div class="w3-container w3-teal margin-top-10">
-                <h5>item 2</h5>
-                <p>information</p>
-            </div>
-            <div class="w3-container w3-teal margin-top-10">
-                <h5>item 3</h5>
-                <p>information</p>
-            </div>
-            <div class="w3-container w3-teal margin-top-10">
-                <h5>item 4</h5>
-                <p>information</p>
-            </div>
-            <div class="w3-container w3-teal margin-top-10">
-                <h5>item 5</h5>
-                <p>information</p>
-            </div>
-            <div class="w3-container w3-teal margin-top-10">
-                <h5>item 6</h5>
-                <p>information</p>
-            </div>
-            <div class="w3-container w3-teal margin-top-10">
-                <h5>item 7</h5>
-                <p>information</p>
-            </div>
-            <div class="w3-container w3-teal margin-top-10">
-                <h5>item 8</h5>
-                <p>information</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 p-3">
+                
+                <div class="accordion" id="accordionExample">
+                    <!-- card1 -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <button class="btn btn-block btn-lg btn-light" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">        
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <h4>Collapsible Group Item #1</h4>
+                                    </div>
+                                </div>
+                                <div class="row selected-item">
+                                    <div class="col-lg-10 text-left">
+                                        selected item
+                                    </div>
+                                    <div class="col-lg-2 text-right">
+                                        inclusi
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="container p-4">
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- card -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <button class="btn btn-block btn-lg btn-light" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                aria-expanded="true" aria-controls="collapseTwo">
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <h4>Collapsible Group Item #2</h4>
+                                    </div>
+                                </div>
+                                <div class="row selected-item">
+                                    <div class="col-lg-10 text-left">
+                                        selected item
+                                    </div>
+                                    <div class="col-lg-2 text-right">
+                                        inclusi
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="container p-4">
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- card -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <button class="btn btn-block btn-lg btn-light" type="button" data-toggle="collapse" data-target="#collapseThree"
+                                aria-expanded="true" aria-controls="collapseThree">
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <h4>Collapsible Group Item #3</h4>
+                                    </div>
+                                </div>
+                                <div class="row selected-item">
+                                    <div class="col-lg-10 text-left">
+                                        selected item
+                                    </div>
+                                    <div class="col-lg-2 text-right">
+                                        inclusi
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="container p-4">
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- card -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <button class="btn btn-block btn-lg btn-light" type="button" data-toggle="collapse" data-target="#collapseFour"
+                                aria-expanded="true" aria-controls="collapseFour">
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <h4>Collapsible Group Item #4</h4>
+                                    </div>
+                                </div>
+                                <div class="row selected-item">
+                                    <div class="col-lg-10 text-left">
+                                        selected item
+                                    </div>
+                                    <div class="col-lg-2 text-right">
+                                        inclusi
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="container p-4">
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- card -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <button class="btn btn-block btn-lg btn-light" type="button" data-toggle="collapse" data-target="#collapseFive"
+                                aria-expanded="true" aria-controls="collapseFive">
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <h4>Collapsible Group Item #5</h4>
+                                    </div>
+                                </div>
+                                <div class="row selected-item">
+                                    <div class="col-lg-10 text-left">
+                                        selected item
+                                    </div>
+                                    <div class="col-lg-2 text-right">
+                                        inclusi
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="container p-4">
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- card -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <button class="btn btn-block btn-lg btn-light" type="button" data-toggle="collapse" data-target="#collapseSix"
+                                aria-expanded="true" aria-controls="collapseSix">
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <h4>Collapsible Group Item #6</h4>
+                                    </div>
+                                </div>
+                                <div class="row selected-item">
+                                    <div class="col-lg-10 text-left">
+                                        selected item
+                                    </div>
+                                    <div class="col-lg-2 text-right">
+                                        inclusi
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="collapseSix" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="container p-4">
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- card -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <button class="btn btn-block btn-lg btn-light" type="button" data-toggle="collapse" data-target="#collapseSeven"
+                                aria-expanded="true" aria-controls="collapseSeven">
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <h4>Collapsible Group Item #7</h4>
+                                    </div>
+                                </div>
+                                <div class="row selected-item">
+                                    <div class="col-lg-10 text-left">
+                                        selected item
+                                    </div>
+                                    <div class="col-lg-2 text-right">
+                                        inclusi
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="collapseSeven" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="container p-4">
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-block">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            item1
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            prezzo
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
             </div>
 
-        </div>
-        <div id="calculator_card" class="w3-blue w3-container w3-third padding">
-            <div class="w3-card-4">
-                <!-- todo -->
-                <header class="w3-container w3-grey">
-                    <h1>calcolatore</h1>
-                </header>
-                <div class="w3-red w3-container">
-                    <p>item 1</p>
+            <!-- riepilogo -->
+            <div class="col-lg-4 p-3">
+                <div id="calc-card" class="container border rounded border-dark">
+                    <div class="row bg-secondary">
+                        <div class="col-sm p-2">
+                            <h3 class="text-white">Riepilogo</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 p-2">
+                            Prezzo base
+                        </div>
+                        <div id="base-price" class="col-6 text-right p-2">
+                            100.00
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="current-price" class="col-6 p-2">
+                            Il tuo prezzo
+                        </div>
+                        <div class="col-6 text-right p-2">
+                            120.00
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col p-2">
+                            <button class="btn btn-block btn-success">
+                                Aggiungi al carrello
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="w3-red w3-container">
-                    <p>item 2</p>
-                </div>
-                <footer class="w3-container w3-grey">
-                    <h5>totale</h5>
-                </footer>
             </div>
         </div>
     </div>
-    
 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="/js/budgeting.js"></script>
 </body>
-<script src="/js/navigationBar.js"></script>
-<script src="/js/budgeting.js"></script>
 </html>

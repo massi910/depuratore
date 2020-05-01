@@ -1,26 +1,26 @@
 ////////////////////// general
 window.onscroll = function () 
 {
-    stickyNavBar(sticky);
-    stickyCalcCard(sticky);
+    stickyCalcCard(this.calcCardSticky);
 };
 
-var navbar = document.getElementById("top-bar");
-var sticky = navbar.offsetTop;  // navigation bar offset position
-var navBarHeight = navbar.offsetHeight; // height of the navigation bar
-document.documentElement.style.setProperty('--navBar-height', navBarHeight + "px");
-var calcCard = document.getElementById("calculator_card");
+var navBarHeight = $('#top-bar').outerHeight();   // navigation bar height
+var calcCard = $('#calc-card');
+var parentTopPadding = calcCard.parent().css('padding-top');    // calc-card parent top padding
+var calcCardSticky = (parseInt(parentTopPadding.replace(/px/, "")) + navBarHeight);
+$(':root').css('--navBar-height', calcCardSticky + "px");
 
 
 ////////////////////// sticky calculator card effect
 function stickyCalcCard(sticky) 
 {
+    // pageYOffset: pixels the current document has been scrolled from the upper left corner
     if (window.pageYOffset >= sticky) 
     {
-        calcCard.classList.add("sticky-calc-card");
+        calcCard.addClass("sticky-calc-card");
     }
     else 
     {
-        calcCard.classList.remove("sticky-calc-card");
+        calcCard.removeClass("sticky-calc-card");
     }
 }
