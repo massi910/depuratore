@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            padding: 48px 0 0;
+        }
+        .sidebar-sticky {
+            position: sticky;
+            top: 0;
+            height: calc(100vh - 48px);
+            padding-top: .5rem;
+            overflow-x: hidden;
+            overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        }
+        .contenuto {
+            margin-top: 48px;
+            padding-top: .5rem;
+            min-height: calc(100vh - 48px);
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Company name</a>
+        <form class="form-inline">
+            <button type="submit" class="btn btn-outline-primary">Logout</button>
+        </form>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!--BARRA LATERALE-->
+            <nav class="col-sm-2 bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link">Link 1</a></li>
+                        <li class="nav-item"><a class="nav-link">Link 2</a></li>
+                        <li class="nav-item"><a class="nav-link">Link 3</a></li>
+                    </ul>
+                    <h6 class="px-3 mt-4 mb-1">Titolo</h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link">Link 1</a></li>
+                        <li class="nav-item"><a class="nav-link">Link 2</a></li>
+                        <li class="nav-item"><a class="nav-link">Link 3</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!--CONTENUTO-->
+            <div class="col-sm-10 ml-sm-auto px-3 bg-success bg-info contenuto">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link">Link 1</a></li>
+                    <li class="nav-item"><a class="nav-link">Link 2</a></li>
+                    <li class="nav-item"><a class="nav-link">Link 3</a></li>
+                </ul>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link">Link 1</a></li>
+                    <li class="nav-item"><a class="nav-link">Link 2</a></li>
+                    <li class="nav-item"><a class="nav-link">Link 3</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
