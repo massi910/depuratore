@@ -6,23 +6,29 @@
     <title>Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel='stylesheet' type='text/css' href='/css/general.css'>
-    <link rel='stylesheet' type='text/css' href='/css/w3.css'>
     <style>
         .col-sm { padding: 2rem; }
     </style>
 </head>
 <body>
-    <!--navbar-->
-    <div id="top-bar" class="padding">
-        <div class="">
-            <a href="/home.html" class="top-bar-item"> Home</a>
-            <!-- Float links to the right. (todo)Hide them on small screens -->
-            <div class="cnt-right w3-hide-small">
-                <a href="/about.html" class="top-bar-item">About</a>
-                <a href="/contact.html" class="top-bar-item">Contact</a>
+    <!-- top navigation bar -->
+    <nav id="top-bar" class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/home.html">Home</a>
+                <a class="nav-item nav-link active" href="#">Preventivazione
+                    <span class="sr-only">(current)</span></a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="#">Info</a>
+                <a class="nav-item nav-link" href="#">Contatti</a>
             </div>
         </div>
-    </div>
+    </nav>
 
     <!--PRIMA RIGA-->
     <div class="container-fluid bg-light text-center my-3 py-5" id="head">
