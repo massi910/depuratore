@@ -30,7 +30,6 @@
         }
     </style>
 </head>
-
 <body>
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">Company name</a>
@@ -59,21 +58,62 @@
             </nav>
 
             <!--CONTENUTO-->
-            <div class="col-sm-10 ml-sm-auto px-3 bg-success bg-info contenuto">
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link">Link 1</a></li>
-                    <li class="nav-item"><a class="nav-link">Link 2</a></li>
-                    <li class="nav-item"><a class="nav-link">Link 3</a></li>
-                </ul>
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link">Link 1</a></li>
-                    <li class="nav-item"><a class="nav-link">Link 2</a></li>
-                    <li class="nav-item"><a class="nav-link">Link 3</a></li>
-                </ul>
-
+            <div class="col-sm-10 ml-sm-auto px-3 contenuto">
+                <div class="container-fluid mt-sm-3">
+                    <h1 class="mb-3 border-bottom">Dashboard</h1>
+                    <!--PRIMA RIGA: CARDS-->
+                    <div class="row text-white mb-3">
+                        <div class="col">
+                            <div class="card bg-primary">
+                                <div class="card-body">Primary card</div>
+                                <div class="card-footer small"><a class="text-white float-right" href="#">View Details ></a></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card bg-warning">
+                                <div class="card-body">Warning card</div>
+                                <div class="card-footer small"><a class="text-white float-right" href="#">View Details ></a></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card bg-success">
+                                <div class="card-body">Success card</div>
+                                <div class="card-footer small"><a class="text-white float-right" href="#">View Details ></a></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card bg-danger">
+                                <div class="card-body">Danger card</div>
+                                <div class="card-footer small"><a class="text-white float-right" href="#">View Details ></a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">Area Chart Example</div>
+                                <div class="card-body">
+                                    <canvas id="myAreaChart" width="1300" height="520" style="display: block; height: 260px; width: 650px;" class="chartjs-render-monitor"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">Bar Chart Example</div>
+                                <div class="card-body">
+                                    <canvas id="myBarChart" width="1300" height="520" style="display: block; height: 260px; width: 650px;" class="chartjs-render-monitor"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="/js/areaChart.js"></script>
+    <script src="/js/barChart.js"></script>
 </body>
-
 </html>
