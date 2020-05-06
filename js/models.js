@@ -1,30 +1,5 @@
-
-///////////////
-/**
- * Class to represent prices
- */
-class Money 
-{
-    constructor(val) 
-    {
-        this.currency = usedCurrency;
-        this.value = parseFloat(val);
-    }
-
-    add(money)
-    {
-        if (money.currency == this.currency)
-            this.value += money.value;
-    }
-
-    toString() 
-    {
-        if (this.value == 0)
-            return "";
-        return this.currency + " " + this.value.toFixed(2);
-    }
-}
-
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 
 /**
  * This class represent a model for a
@@ -37,7 +12,8 @@ class PvSection
         this.id = id;
         this.name = name;
         this.description = description;
-        this.items = items;
+        this.items = [];
+        items.forEach(item => this.items.push(item));
         this.items.push(new PvItem(99, "nessuno", "nessuno", 0, id));
         this.mandatory = mandatory;
         this.selected = null;
@@ -64,7 +40,7 @@ class PvSection
      * @param parent 
      */
     scaffoldSection(parent)
-    {
+    {        
         var card = this.createCard();
         var cardHeader = this.createCardHeader();
         var button = this.createButton();
@@ -180,6 +156,9 @@ class PvSection
     
 }
 
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
 /**
  * This class represent a model
  * for a single item in the budgeting page.
@@ -235,5 +214,33 @@ class PvItem
         row.append(col1).append(col2);
 
         return button.append(row);
+    }
+}
+
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
+/**
+ * Class to represent prices
+ */
+class Money 
+{
+    constructor(val) 
+    {
+        this.currency = usedCurrency;
+        this.value = parseFloat(val);
+    }
+
+    add(money) 
+    {
+        if (money.currency == this.currency)
+            this.value += money.value;
+    }
+
+    toString() 
+    {
+        if (this.value == 0)
+            return "";
+        return this.currency + " " + this.value.toFixed(2);
     }
 }
