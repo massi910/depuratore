@@ -9,13 +9,13 @@
     <link rel='stylesheet' type='text/css' href='/css/login.css'>
 </head>
 <body class="text-center bg-primary">
-    <form class="card">
+    <form class="card" method="POST" action="login.php">
         <h3>Please sign in</h3>
         <hr>
         <h6>Email</h6>
-        <input type="email" id="inputEmail" class="form-control" required autofocus>
+        <input type="email" id="inputEmail" class="form-control" required autofocus name="inputEmail">
         <h6>Password</h6>
-        <input type="password" id="inputPassword" class="form-control" required>
+        <input type="password" id="inputPassword" class="form-control" required name="inputPassword">
         <input class="btn btn-primary btn-block" type="submit" value="Log in">
         <hr>
         <a href="/home.html" class="btn btn-outline-secondary btn-sm">oppure torna alla home</a>

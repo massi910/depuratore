@@ -28,6 +28,7 @@
             min-height: calc(100vh - 48px);
             height: auto;
         }
+        .sidebar-heading { font-size: .75rem; font-weight: bold; margin-bottom: -.5rem; }
     </style>
 </head>
 <body>
@@ -42,17 +43,16 @@
         <div class="row">
             <!--BARRA LATERALE-->
             <nav class="col-sm-2 bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item"><a class="nav-link">Link 1</a></li>
-                        <li class="nav-item"><a class="nav-link">Link 2</a></li>
-                        <li class="nav-item"><a class="nav-link">Link 3</a></li>
-                    </ul>
-                    <h6 class="px-3 mt-4 mb-1">Titolo</h6>
-                    <ul class="nav flex-column">
-                        <li class="nav-item"><a class="nav-link">Link 1</a></li>
-                        <li class="nav-item"><a class="nav-link">Link 2</a></li>
-                        <li class="nav-item"><a class="nav-link">Link 3</a></li>
+                <div class="sidebar-sticky mt-sm-3">
+                    <ul class="nav nav-pills flex-column mt-sm-3" id="navigator" role="tablist">
+                        <li class="nav-item"><a class="nav-link disabled sidebar-heading">SEZIONI</a></li>
+                        <li class="nav-item"><a class="nav-link active" id="dashboard" role="tab" href="monitor.html">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" id="pozzo" role="tab" href="#">Pozzo</a></li>
+                        <li class="nav-item"><a class="nav-link" id="ossigenazione" role="tab" href="#">Ossigenazione</a></li>
+                        <li class="nav-item"><a class="nav-link" id="lavaggio" role="tab" href="#">Lavaggio</a></li>
+                        <li class="nav-item"><a class="nav-link" id="pescante" role="tab" href="#">Pescante superficiale</a></li>
+                        <li class="nav-item"><a class="nav-link" id="allarmi" role="tab" href="#">Allarmi</a></li>
+                        <li class="nav-item"><a class="nav-link" id="grafici" role="tab" href="#">Grafici</a></li>
                     </ul>
                 </div>
             </nav>
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-header">Area Chart Example</div>
                                 <div class="card-body">
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-header">Bar Chart Example</div>
                                 <div class="card-body">
@@ -110,10 +110,17 @@
             </div>
         </div>
     </div>
+    
     <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="/js/areaChart.js"></script>
     <script src="/js/barChart.js"></script>
+    <script>
+        // $('#navigator a').on('click', function (e) {
+        //     $('#navigator a').removeClass("active")    
+        //     $(this).addClass("active")
+        // })
+    </script>
 </body>
 </html>
