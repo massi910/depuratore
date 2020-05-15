@@ -1,37 +1,14 @@
 /**
- * (monitoring) sidebar template
+ * (monitoring) sidebar component
  */
 Vue.component('sidebar',
 {
-    data: function() 
-    {
-        return{
-            currentPath: window.location.pathname,
-            menus: 
-            [
-                { name: "Pozzo", link: "/monitoring/pozzo.html", activeClass: ""},
-                { name: "Ossigenazione", link: "/monitoring/ossigenazione.html", activeClass: ""},
-                { name: "Lavaggio", link: "/monitoring/lavaggio.html", activeClass: ""},
-                { name: "Pescante", link: "/monitoring/pescante.html", activeClass: ""},
-                { name: "Allarmi", link: "/monitoring/allarmi.html", activeClass: ""},
-                { name: "Grafici", link: "/monitoring/grafici.html", activeClass: ""}                
-            ]
-        };
-    },
+    props: ['sections'],
     methods:
     {
-        /** menu active function */
-        evalActive()
-        {
-            this.menus.forEach(menu => {
-                if (menu.link == this.currentPath)
-                    menu.activeClass = "active";
-            });
-        }
-    },
-    created()
-    {
-        this.evalActive();
+        activation: function (e) {           
+            this.$emit('activation', e.target.id)
+          }
     },
     template:
     `
@@ -45,11 +22,14 @@ Vue.component('sidebar',
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- content menu -->
+        <!-- content sections -->
         <div class="collapse navbar-collapse mr-auto pt-2 align-items-start" id="navbarNavAltMarkup">
             <div class="navbar-nav flex-column">
-                <div v-for="menu in menus" :key="menu.name" class="nav-item nav-link">
-                    <a v-bind:href="menu.link" :class="menu.activeClass" class="nav-link"> {{ menu.name }} </a>
+                <div v-for="section in sections" :key="section.name" class="nav-item nav-link">
+                    <a href="#"
+                    v-on:click="activation"
+                    :id="'link-'.concat(section.name)"
+                    :class="section.activeClass" class="nav-link"> {{ section.name }} </a>
                 </div>
             </div>
         </div>
