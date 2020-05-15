@@ -1,1 +1,1 @@
-[{"sezione":"pozzo","id":"pompa","nome":"pompa pozzo","on":true},{"sezione":"ossigenazione","id":"elettrovalvola","nome":"elettrovalvola carico acqua","on":false}]
+[{"sezione":"pozzo","id":"pompa","nome":"pompa pozzo","on":false},{"sezione":"ossigenazione","id":"elettrovalvola","nome":"elettrovalvola carico acqua","on":false}]
