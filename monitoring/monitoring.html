@@ -6,7 +6,7 @@
     <title>Monitoring</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
-        crossorigin="anonymous"">
+        crossorigin="anonymous">
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/tmp-sidebar.css">
 </head>
@@ -22,7 +22,7 @@
             <div class="col-lg-10">
                 <!-- utenze -->
                 <menusection :section="menu[0]" v-if="isActive(menu[0].name)">
-                    <utenze v-bind:utenze="utenze" :sezioni="sections"></utenze>
+                    <utenze v-bind:utenze="utenze" :sezioni="sections" v-on:raise="moveToWarn"></utenze>
                 </menusection>
                 
                 <!-- allarmi -->
