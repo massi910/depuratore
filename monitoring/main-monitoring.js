@@ -15,7 +15,8 @@ var app = new Vue({
             { name: "Allarmi", description: "Controllo allarmi" },
             { name: "Grafici", description: "Grafici e statistiche" }
         ],
-        utenze: []
+        utenze: [],
+        sections: []
     },
     methods:
     {
@@ -31,9 +32,22 @@ var app = new Vue({
             return (id) => {   return this.activeMenu == id; }
         }
     },
-    created: async function() {
+    created: async function() 
+    {
+        axios
+            .get('/php/mnt_items.php')
+            .then(response => (this.utenze = response.data))
+            .catch(error => console.log(error));
+
+        axios
+            .get('/php/mnt_sections.php')
+            .then(response => (this.sections = response.data))
+            .catch(error => console.log(error))
+
+            /*
         const response = await fetch('/status.json')
         const data = await response.json()
         this.utenze = data
+        */
     }
 });

@@ -22,7 +22,7 @@
             <div class="col-lg-10">
                 <!-- utenze -->
                 <menusection :section="menu[0]" v-if="isActive(menu[0].name)">
-                    <utenze v-bind:utenze="utenze"></utenze>
+                    <utenze v-bind:utenze="utenze" :sezioni="sections"></utenze>
                 </menusection>
                 
                 <!-- allarmi -->
@@ -51,6 +51,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>    
     <script src="/js/tmp-sidebar.js"></script>
     <script src="/js/comp/menusection.js"></script>

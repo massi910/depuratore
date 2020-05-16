@@ -1,13 +1,13 @@
 <?php
     /**
-     * sections db request
+     * monitoring sections db request
      */
 
 
     include "config.php";
 
     $return_arr = array();
-    $query = "SELECT * FROM sections";
+    $query = "SELECT * FROM mnt_sections";
 
     $result = mysqli_query($conn,$query);
 
@@ -16,13 +16,13 @@
         $id = $row['id'];
         $name = $row['name'];
         $description = $row['description'];
-        $mandatory = $row['mandatory'];
 
         // create associative array
-        $return_arr[] = array("id" => $id,
+        $return_arr[] = array(
+                        "id" => $id,
                         "name" => $name,
                         "description" => $description,
-                        "mandatory" => $mandatory);
+                    );
     }
 
     // Encoding array in JSON format

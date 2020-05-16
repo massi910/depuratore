@@ -81,7 +81,7 @@ var pvSectionsMap = new Map();  // sections map
 $(document).ready(function () 
 {
     $.ajax({
-        url: '/budgeting/items.php',
+        url: '/php/items.php',
         type: 'get',
         dataType: 'JSON',   // type of data expected from the server
         success: function (response) 
@@ -110,7 +110,7 @@ $(document).ready(function ()
     });
 
     $.ajax({
-        url: '/budgeting/sections.php',
+        url: '/php/sections.php',
         type: 'get',
         dataType: 'JSON',
         success: function (response) {

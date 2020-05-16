@@ -12,14 +12,14 @@ Vue.component('utenza', {
     props: ['utenza'],
     template: `
         <div class="card col">
-            <h1>{{ utenza.nome }}</h1>
-            Accesa: {{utenza.on}}
-            <button v-if="utenza.on" class="btn btn-danger" v-on:click="updateStatus(utenza)">SPEGNI</button>
+            <h1>{{ utenza.name }}</h1>
+            Accesa: {{utenza.b_status}}
+            <button v-if="utenza.b_status" class="btn btn-danger" v-on:click="updateStatus(utenza)">SPEGNI</button>
             <button v-else class="btn btn-success" v-on:click="updateStatus(utenza)">ACCENDI</button><br>
         </div>`,
     methods: {
         updateStatus: async function(utenza) {
-            utenza.on = utenza.on ? false : true
+            utenza.b_status = utenza.b_status ? false : true
             const data = await saveStatus()
         }
     }

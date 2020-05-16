@@ -1,27 +1,38 @@
 Vue.component('utenze', {
     template: `
     <div>
-        <div class="btn-group"><button v-for="sezione in sezioni" @click="setSezioneCorrente(sezione)" class="btn btn-primary">{{sezione}}</button></div>
+        <div class="btn-group"><button 
+            v-for="sezione in sezioni"
+            :key="sezione.id" 
+            @click="setSezioneCorrente(sezione.id)" 
+            class="btn btn-primary">{{sezione.name}}</button></div>
         <utenza v-for="utenza in utenzeAttive" v-bind:utenza="utenza" v-bind:key="utenza.id"></utenza>
     </div>`,
-    props: ['utenze'],
+    props: 
+    {
+        utenze: Array,
+        sezioni: Array
+    },
     data: function() {
         return {
-            sezioneCorrente: '',
-            sezioni: { pozzo: 'pozzo', ossigenazione: 'ossigenazione', lavaggio: 'lavaggio', pescante: 'pescante' }
+            sezioneCorrente: undefined
         }
     },
     computed: {
         utenzeAttive: function() {
-            var alias = this
-            return this.utenze.filter(function(utenza) { return utenza.sezione == alias.sezioneCorrente }) }
+            var alias = this;
+            return this.utenze.filter(function(utenza) 
+            {                 
+                if (alias.sezioneCorrente == undefined) // show all when starting
+                    return true;
+                    
+                return utenza.section_id == alias.sezioneCorrente 
+            })}
     },
-    methods: {
-        setSezioneCorrente: function(sezione) {
+    methods: 
+    {
+        setSezioneCorrente: function(sezione) {            
             this.sezioneCorrente = sezione
         }
     },
-    created: function() {
-        this.sezioneCorrente = this.sezioni.pozzo
-    }
 })
