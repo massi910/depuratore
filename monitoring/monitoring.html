@@ -27,7 +27,7 @@
                 
                 <!-- allarmi -->
                 <menusection :section="menu[1]" v-if="isActive(menu[1].name)">
-
+                    <cntalarms :utenze="utenze"></cntalarms>
                 </menusection>
 
                 <!-- grafici -->
@@ -53,11 +53,12 @@
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>    
+    <script src="/js/comp/cmp-cnt-alarms.js"></script>
     <script src="/js/tmp-sidebar.js"></script>
     <script src="/js/comp/menusection.js"></script>
     <script src="/js/comp/utenza.js"></script>
     <script src="/js/comp/utenze.js"></script>
     <script src="main-monitoring.js"></script>
-    
+    <script src="/js/comp/cmp-card-alarm.js"></script>
 </body>
 </html>

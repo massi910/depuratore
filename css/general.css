@@ -33,3 +33,21 @@
 {
     font-size: initial;
 }
+
+@media (min-width: 576px)
+{
+    .card-alarm
+    {
+        min-width: 32rem;
+    }
+}
+
+
+@media (max-width: 576px)
+{ 
+    /* alarms */
+    .card-alarm
+    {
+        min-width: auto;
+    }
+}

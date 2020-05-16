@@ -8,7 +8,7 @@ var app = new Vue({
     el: '#app',
     data: 
     {
-        activeMenu: "Utenze",
+        activeMenu: "Allarmi",
         menu: 
         [
             { name: "Utenze", description: "Utenze monitorabili" },
@@ -43,11 +43,5 @@ var app = new Vue({
             .get('/php/mnt_sections.php')
             .then(response => (this.sections = response.data))
             .catch(error => console.log(error))
-
-            /*
-        const response = await fetch('/status.json')
-        const data = await response.json()
-        this.utenze = data
-        */
     }
 });
