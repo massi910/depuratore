@@ -4,34 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitoring</title>
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
         crossorigin="anonymous">
     <link rel="stylesheet" href="/css/general.css">
-    <link rel="stylesheet" href="/css/tmp-sidebar.css">
 </head>
 <body>
     <div id="app" class="container-fluid">
         <div class="row">
             <!-- sidebar -->
             <div class="col-lg-2 p-0">
-                <sidebar :sections="menu" v-on:activation="setActiveMenu"></sidebar>
+                <sidebar :menus="menus" v-on:activation="setActiveMenu"></sidebar>
             </div>
 
             <!-- content -->
             <div class="col-lg-10">
                 <!-- utenze -->
-                <menusection :section="menu[0]" v-if="isActive(menu[0].name)">
+                <menusection :section="menus[0]" v-if="isActive(menus[0].name)">
                     <utenze v-bind:utenze="utenze" :sezioni="sections" v-on:raise="moveToWarn"></utenze>
                 </menusection>
                 
                 <!-- allarmi -->
-                <menusection :section="menu[1]" v-if="isActive(menu[1].name)">
+                <menusection :section="menus[1]" v-if="isActive(menus[1].name)">
                     <cntalarms :utenze="utenze"></cntalarms>
                 </menusection>
 
                 <!-- grafici -->
-                <menusection :section="menu[2]" v-if="isActive(menu[2].name)">
+                <menusection :section="menus[2]" v-if="isActive(menus[2].name)">
 
                 </menusection>
 
@@ -51,6 +52,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>    
     <script src="/js/comp/cmp-cnt-alarms.js"></script>

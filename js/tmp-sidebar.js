@@ -3,7 +3,7 @@
  */
 Vue.component('sidebar',
 {
-    props: ['sections'],
+    props: ['menus'],
     methods:
     {
         activation: function (e) {           
@@ -13,10 +13,14 @@ Vue.component('sidebar',
     template:
     `
     <nav id="sidebar" 
-    class="navbar navbar-expand-lg navbar-dark bg-dark flex-column sticky-top">
+        class="navbar navbar-expand-lg navbar-dark bg-dark flex-column sticky-top p-0">
         
-        <a class="navbar-brand" href="#/home.html">Depuratore MD1</a>
+        <!-- navbar header -->
+        <div class="container-fluid bg-secondary p-3">
+            <a class="navbar-brand mx-auto" href="/home.html">Depuratore MD1</a>
+        </div>
         
+        <!-- collapse for smaller screens -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,11 +29,16 @@ Vue.component('sidebar',
         <!-- content sections -->
         <div class="collapse navbar-collapse mr-auto pt-2 align-items-start" id="navbarNavAltMarkup">
             <div class="navbar-nav flex-column">
-                <div v-for="section in sections" :key="section.name" class="nav-item nav-link">
+                <div class="nav-item nav-link"
+                    v-for="menu in menus" 
+                    :key="menu.name">
                     <a href="#"
                     v-on:click="activation"
-                    :id="'link-'.concat(section.name)"
-                    :class="section.activeClass" class="nav-link"> {{ section.name }} </a>
+                    :id="'link-'.concat(menu.name)"
+                    class="nav-link"> {{ menu.name }} 
+                    <span
+                        class="badge bg-danger">4</span>
+                    </a>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@ var app = new Vue({
     data: 
     {
         activeMenu: "Allarmi",
-        menu: 
+        menus: 
         [
             { name: "Utenze", description: "Utenze monitorabili" },
             { name: "Allarmi", description: "Controllo allarmi" },
@@ -25,7 +25,7 @@ var app = new Vue({
             this.activeMenu = name.replace("link-", "");
         },
         moveToWarn: function() {
-            this.activeMenu = this.menu[1].name
+            this.activeMenu = this.menus[1].name
         }
     },
     computed:
