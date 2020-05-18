@@ -24,7 +24,7 @@ var app = new Vue({
         {
             this.activeMenu = name.replace("link-", "");
         },
-        moveToWarn: function() {
+        moveToWarnings: function() {
             this.activeMenu = this.menu[1].name
         }
     },
