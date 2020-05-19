@@ -25,8 +25,8 @@ var app = new Vue({
         {
             this.activemenu = name;
         },
-        moveToWarn: function() {
-            this.activemenu = this.menus[1].name
+        moveToWarnings: function() {
+            this.activeMenu = this.menu[1].name
         }
     },
     mounted()

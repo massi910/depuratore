@@ -2,14 +2,16 @@ Vue.component('utenze', {
     template: `
     <div>
         <div class="btn-group mt-3">
+            <button class="btn btn-primary" @click="sezioneCorrente = undefined">TUTTE</button>
             <button 
                 v-for="sezione in sezioni"
                 :key="sezione.id" 
                 @click="setSezioneCorrente(sezione.id)" 
-                class="btn btn-primary">{{sezione.name}}
+                class="btn btn-primary">
+                {{sezione.name}}
             </button>
         </div>
-        <utenza v-on:alarm="raise" v-for="utenza in utenzeAttive" v-bind:utenza="utenza" v-bind:key="utenza.id"></utenza>
+        <utenza v-on="$listeners" v-for="utenza in utenzeAttive" v-bind:utenza="utenza" v-bind:key="utenza.id"></utenza>
     </div>`,
     props: 
     {
@@ -36,9 +38,6 @@ Vue.component('utenze', {
     {
         setSezioneCorrente: function(sezione) {            
             this.sezioneCorrente = sezione
-        },
-        raise: function() {
-            this.$emit('raise')
         }
     },
 })

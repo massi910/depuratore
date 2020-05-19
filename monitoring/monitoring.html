@@ -23,7 +23,7 @@
             <div class="col-lg-10">
                 <!-- utenze -->
                 <menusection :section="menus[0]" v-if="isActive(menus[0].name)">
-                    <utenze v-bind:utenze="utenze" :sezioni="sections" v-on:raise="moveToWarn"></utenze>
+                    <utenze v-bind:utenze="utenze" :sezioni="sections" v-on:alarm="moveToWarnings"></utenze>
                 </menusection>
                 
                 <!-- allarmi -->
