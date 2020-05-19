@@ -3,12 +3,10 @@
  */
 Vue.component('sidebar',
 {
-    props: ['menus'],
-    methods:
+    props:
     {
-        activation: function (e) {           
-            this.$emit('activation', e.target.id)
-          }
+        activemenu: String,
+        menus: Array
     },
     template:
     `
@@ -28,18 +26,14 @@ Vue.component('sidebar',
 
         <!-- content sections -->
         <div class="collapse navbar-collapse mr-auto pt-2 align-items-start" id="navbarNavAltMarkup">
-            <div class="navbar-nav flex-column">
-                <div class="nav-item nav-link"
-                    v-for="menu in menus" 
-                    :key="menu.name">
-                    <a href="#"
-                    v-on:click="activation"
-                    :id="'link-'.concat(menu.name)"
-                    class="nav-link"> {{ menu.name }} 
-                    <span
-                        class="badge bg-danger">4</span>
-                    </a>
-                </div>
+            <div class="navbar-nav flex-column p-4">
+                <sidemenuitem
+                    v-for="item in menus"
+                    :key="item.name"
+                    v-bind:item="item"
+                    v-bind:isactive="activemenu == item.name"
+                    v-on="$listeners">
+                </sidemenuitem>
             </div>
         </div>
     </nav>

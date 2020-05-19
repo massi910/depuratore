@@ -16,7 +16,7 @@
         <div class="row">
             <!-- sidebar -->
             <div class="col-lg-2 p-0">
-                <sidebar :menus="menus" v-on:activation="setActiveMenu"></sidebar>
+                <sidebar :menus="menus" :activemenu="activemenu" v-on:activation="setActiveMenu"></sidebar>
             </div>
 
             <!-- content -->
@@ -57,8 +57,9 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>    
     <script src="/js/comp/cmp-cnt-alarms.js"></script>
-    <script src="/js/tmp-sidebar.js"></script>
-    <script src="/js/comp/menusection.js"></script>
+    <script src="/js/comp/cmp-sidemenuitem.js"></script>
+    <script src="/js/comp/cmp-sidebar.js"></script>
+    <script src="/js/comp/cmp-menusection.js"></script>
     <script src="/js/comp/utenza.js"></script>
     <script src="/js/comp/utenze.js"></script>
     <script src="main-monitoring.js"></script>

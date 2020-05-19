@@ -11,13 +11,13 @@ Vue.component('cardalarm',
     {
         utenza:
         {
-            id: String,
+            id: Number,
             name: String,
             description: String,
-            b_status: String,
-            b_alarm: String,
-            b_manual: String,
-            section_id: String
+            b_status: Boolean,
+            b_alarm: Boolean,
+            b_manual: Boolean,
+            section_id: Number
         }
     },
     methods:
@@ -29,9 +29,9 @@ Vue.component('cardalarm',
     },
     template:
     `
-    <div class="card mb-3 card-alarm mx-auto animated" 
+    <div class="card mb-3 card-alarm mx-auto animated slow" 
         v-bind:class="{ 'border-secondary' : !utenza.b_alarm,
-        'bounce' : utenza.b_alarm, 'infinite' : utenza.b_alarm }"
+        'flash' : utenza.b_alarm, 'infinite' : utenza.b_alarm }"
         style="max-width: 32rem;">
         <div>
             <div class="card-header"> {{ utenza.name }} </div>
