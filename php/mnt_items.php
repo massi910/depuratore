@@ -13,13 +13,13 @@
 
     while($row = mysqli_fetch_array($result))
     {
-        $id = $row['id'];
+        $id = intval($row['id']);
         $name = $row['name'];
         $description = $row['description'];
-        $b_status = $row['b_status'];
-        $b_alarm = $row['b_alarm'];
-        $b_manual = $row['b_manual'];
-        $section_id = $row['section_id'];
+        $b_status = boolval($row['b_status']);
+        $b_alarm = boolval($row['b_alarm']);
+        $b_manual = boolval($row['b_manual']);
+        $section_id = intval($row['section_id']);
 
         // create associative array
         $return_arr[] = array(

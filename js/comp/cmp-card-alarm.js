@@ -1,50 +1,56 @@
+/**
+ * Alarm card component
+ */
 Vue.component('cardalarm',
 {
+    data: function()
+    { return {
+        
+    }},
     props:
     {
         utenza:
         {
-            id: String,
+            id: Number,
             name: String,
             description: String,
-            b_status: String,
-            b_alarm: String,
-            b_manual: String,
-            section_id: String
+            b_status: Boolean,
+            b_alarm: Boolean,
+            b_manual: Boolean,
+            section_id: Number
         }
-    },
-    watch:
-    {
-        utenza:
-        {
-            immediate: true,
-            deep: true,
-            handler: function(newVal, oldVal)
-            {
-                if (newVal.b_alarm != "0")
-                {
-                    // change card style
-                    // send signal to app for alarm menu highlight
-                }
-            }
-        } 
     },
     methods:
     {
-
+        deActiveAlarm: function(event)
+        {
+            this.utenza.b_alarm = false;
+        }
     },
     template:
     `
-    <div class="card border-secondary mb-3 card-alarm mx-auto" style="max-width: 32rem;">
-        <div class="card-header"> {{ utenza.name }} </div>
-        <div class="card-body">
-            <h5 class="card-title"> {{ utenza.name }} </h5>
-            <p class="card-text"> {{ utenza.description }} </p>
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" :id="utenza.id.concat('-customSwitches')">
-                <label class="custom-control-label" :for="utenza.id.concat('-customSwitches')">
-                    Disattiva
-                </label>
+    <div class="card mb-3 card-alarm mx-auto animated slow" 
+        v-bind:class="{ 'border-secondary' : !utenza.b_alarm,
+        'flash' : utenza.b_alarm, 'infinite' : utenza.b_alarm }"
+        style="max-width: 32rem;">
+        <div>
+            <div class="card-header"> {{ utenza.name }} </div>
+            <!-- to support the mask effect -->
+            <div class="view">
+                <div class="card-body"
+                    :style="utenza.b_alarm ? { opacity : 0.2 } : { opacity : 1 }"
+                    >
+                    <h5 class="card-title"> {{ utenza.name }} </h5>
+                    <p class="card-text"> {{ utenza.description }} </p>
+                </div>
+                <!-- active alarm mask -->
+                <a class="mask flex-center rgba-red-strong p-0"
+                    v-if="utenza.b_alarm"
+                    v-on:click="deActiveAlarm">
+                    <h4 class="black-text">
+                        Disattiva allarme
+                    </h4>
+                </a>
             </div>
         </div>
     </div>

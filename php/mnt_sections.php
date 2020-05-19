@@ -13,7 +13,7 @@
 
     while($row = mysqli_fetch_array($result))
     {
-        $id = $row['id'];
+        $id = intval($row['id']);
         $name = $row['name'];
         $description = $row['description'];
 
