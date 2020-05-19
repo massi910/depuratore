@@ -16,7 +16,9 @@ var app = new Vue({
             { name: "Grafici", description: "Grafici e statistiche" }
         ],
         utenze: [],
-        sections: []
+        sections: [],
+        units: [],
+        consumptions: []
     },
     methods:
     {
@@ -45,6 +47,15 @@ var app = new Vue({
         axios
             .get('/php/mnt_sections.php')
             .then(response => (this.sections = response.data))
+            .catch(error => console.log(error))
+
+        axios
+            .get('/php/units.php')
+            .then(response => this.units = response.data)
+            .catch(error => console.log(error))
+
+        axios.get('/php/consumptions.php')
+            .then(response => this.consumptions = response.data)
             .catch(error => console.log(error))
     }
 });

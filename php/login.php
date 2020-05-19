@@ -1,5 +1,5 @@
 <?php
-    include '../budgeting/config.php';
+    include 'config.php';
     
     $email = $_POST['inputEmail'];
     $password = $_POST['inputPassword'];
@@ -22,7 +22,7 @@
         }
         else
         {
-            header('location: /monitor.html');
+            header('location: /monitoring/monitoring.html');
         }
     }
 ?>
