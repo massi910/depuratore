@@ -8,7 +8,7 @@ var app = new Vue({
     el: '#app',
     data: 
     {
-        activemenu: "Allarmi",
+        activeMenu: "Allarmi",
         menus: 
         [
             { name: "Utenze", description: "Utenze monitorabili", counter: 0 },
@@ -20,21 +20,41 @@ var app = new Vue({
     },
     methods:
     {
+        loadItems: function () 
+        {
+            axios
+            .get('/php/mnt_items.php')
+            .then(response => (this.utenze = response.data))
+            .catch(error => console.log(error));
+        },
+        loadSections: function () 
+        {
+            axios
+            .get('/php/mnt_sections.php')
+            .then(response => (this.sections = response.data))
+            .catch(error => console.log(error))
+        },
         /** handler for activation menu change */
         setActiveMenu: function (name) 
         {
-            this.activemenu = name;
+            this.activeMenu = name;
         },
         moveToWarnings: function() {
-            this.activeMenu = this.menu[1].name
+            console.log(this.menus[1].name);
+            
+            this.activeMenu = this.menus[1].name;
+        },
+        reloadData: function () {
+            this.loadItems();
+            this.loadSections();
         }
     },
     mounted()
     {
         /** get saved active menu */
-        if (localStorage.activemenu)
+        if (localStorage.activeMenu)
         {
-            this.activemenu = localStorage.activemenu;
+            this.activeMenu = localStorage.activeMenu;
         }
     },
     watch:
@@ -45,9 +65,9 @@ var app = new Vue({
             this.menus[1].counter = count;
         },
         /** store last active menu to the client machine */
-        activemenu(newValue)
+        activeMenu(newValue)
         {
-            localStorage.activemenu = newValue;
+            localStorage.activeMenu = newValue;
         }
     },
     computed:
@@ -64,19 +84,12 @@ var app = new Vue({
         },
         isActive() 
         {
-            return (name) => {   return this.activemenu == name; }
+            return (name) => {   return this.activeMenu == name; }
         }
     },
     created: async function() 
     {
-        axios
-            .get('/php/mnt_items.php')
-            .then(response => (this.utenze = response.data))
-            .catch(error => console.log(error));
-
-        axios
-            .get('/php/mnt_sections.php')
-            .then(response => (this.sections = response.data))
-            .catch(error => console.log(error))
+        this.loadItems();
+        this.loadSections();
     }
 });

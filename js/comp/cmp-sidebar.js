@@ -3,6 +3,12 @@
  */
 Vue.component('sidebar',
 {
+    methods:
+    {
+        refresh: function () {         
+            this.$emit('refresh')
+          }
+    },
     props:
     {
         activemenu: String,
@@ -36,6 +42,17 @@ Vue.component('sidebar',
                 </sidemenuitem>
             </div>
         </div>
+
+        <div class="collapse navbar-collapse mr-auto pt-2 align-items-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav flex-column p-4">
+            <button type="button" class="btn btn-default btn-sm"
+                v-on:click="refresh"
+                >
+                <span class="glyphicon glyphicon-refresh"></span> Refresh
+            </button>
+            </div>
+        </div>
+
     </nav>
     `
 });
