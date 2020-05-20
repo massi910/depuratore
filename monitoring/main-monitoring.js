@@ -16,7 +16,9 @@ var app = new Vue({
             { name: "Grafici", description: "Grafici e statistiche", counter: 0 }
         ],
         utenze: [],
-        sections: []
+        sections: [],
+        units: [],
+        consumptions: []
     },
     methods:
     {
@@ -91,5 +93,14 @@ var app = new Vue({
     {
         this.loadItems();
         this.loadSections();
+        
+        axios
+            .get('/php/units.php')
+            .then(response => this.units = response.data)
+            .catch(error => console.log(error))
+
+        axios.get('/php/consumptions.php')
+            .then(response => this.consumptions = response.data)
+            .catch(error => console.log(error))
     }
 });
