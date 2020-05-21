@@ -16,7 +16,10 @@
         <div class="row">
             <!-- sidebar -->
             <div class="col-lg-2 p-0">
-                <sidebar :menus="menus" :activemenu="activemenu" v-on:activation="setActiveMenu"></sidebar>
+                <sidebar :menus="menus" :activemenu="activemenu" 
+                    v-on:activation="setActiveMenu"
+                    v-on:refresh="reloadData"
+                    ></sidebar>
             </div>
 
             <!-- content -->
