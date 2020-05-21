@@ -26,7 +26,9 @@ var app = new Vue({
             { title: "fase2", description: "fase 2" },
             { title: "fase3", description: "fase 3" },
             { title: "fase4", description: "fase 4" }
-        ]
+        ],
+        water_cons: [],
+        water_level: []
     },
     methods:
     {
@@ -123,6 +125,14 @@ var app = new Vue({
 
         axios.get('/php/consumptions.php')
             .then(response => this.consumptions = response.data)
+            .catch(error => console.log(error))
+
+        axios.get('/php/water_cons.php')
+            .then(response => this.water_cons = response.data)
+            .catch(error => console.log(error))
+
+        axios.get('/php/water_level.php')
+            .then(response => this.water_level = response.data)
             .catch(error => console.log(error))
     }
 });

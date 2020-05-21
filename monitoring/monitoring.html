@@ -36,7 +36,7 @@
 
                 <!-- grafici -->
                 <menusection :section="menus[2]" v-if="isActive(menus[2].name)">
-
+                    <charts :units="units" :water_cons="water_cons" :water_level="water_level"></charts>
                 </menusection>
 
                 <menusection :section="menus[3]" v-if="isActive(menus[3].name)">
@@ -59,6 +59,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -71,6 +74,7 @@
     <script src="/js/comp/cmp-menusection.js"></script>
     <script src="/js/comp/utenza.js"></script>
     <script src="/js/comp/utenze.js"></script>
+    <script src="/js/comp/charts.js"></script>
     <script src="main-monitoring.js"></script>
     <script src="/js/comp/cmp-card-alarm.js"></script>
     
