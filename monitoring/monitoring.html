@@ -16,7 +16,7 @@
         <div class="row">
             <!-- sidebar -->
             <div class="col-lg-2 p-0">
-                <sidebar :menus="menus" :activemenu="activemenu" 
+                <sidebar :menus="menus" :activemenu="activeMenu" 
                     v-on:activation="setActiveMenu"
                     v-on:refresh="reloadData"
                     ></sidebar>
@@ -56,7 +56,8 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <!-- Chart.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
