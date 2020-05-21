@@ -16,7 +16,7 @@
         <div class="row">
             <!-- sidebar -->
             <div class="col-lg-2 p-0">
-                <sidebar :menus="menus" :activemenu="activemenu" 
+                <sidebar :menus="menus" :activemenu="activeMenu" 
                     v-on:activation="setActiveMenu"
                     v-on:refresh="reloadData"
                     ></sidebar>
@@ -39,6 +39,10 @@
 
                 </menusection>
 
+                <menusection :section="menus[3]" v-if="isActive(menus[3].name)">
+                    <cnt-phases :phases="phases"></cnt-phases>
+                </menusection>
+
             </div>
 
         </div>
@@ -59,6 +63,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>    
+    <script src="/js/comp/cmp-cnt-phases.js"></script>
+    <script src="/js/comp/cmp-general-card.js"></script>
     <script src="/js/comp/cmp-cnt-alarms.js"></script>
     <script src="/js/comp/cmp-sidemenuitem.js"></script>
     <script src="/js/comp/cmp-sidebar.js"></script>
@@ -67,5 +73,10 @@
     <script src="/js/comp/utenze.js"></script>
     <script src="main-monitoring.js"></script>
     <script src="/js/comp/cmp-card-alarm.js"></script>
+    
+    
+    
+    
+    
 </body>
 </html>
