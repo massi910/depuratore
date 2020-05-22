@@ -36,7 +36,10 @@
 
                 <!-- grafici -->
                 <menusection :section="menus[2]" v-if="isActive(menus[2].name)">
-                    <charts :units="units" :water_cons="water_cons" :water_level="water_level"></charts>
+                    <water-charts :units="units" :water_cons="water_cons" :water_level="water_level"></water-charts>
+                </menusection>
+                <menusection :section="menus[3]" v-if="isActive(menus[3].name)">
+                    <consumptions :utenze="utenze" :units="units" :consumptions="consumptions"></consumptions>
                 </menusection>
 
             </div>
@@ -68,7 +71,8 @@
     <script src="/js/comp/cmp-menusection.js"></script>
     <script src="/js/comp/utenza.js"></script>
     <script src="/js/comp/utenze.js"></script>
-    <script src="/js/comp/charts.js"></script>
+    <script src="/js/comp/water-charts.js"></script>
+    <script src="/js/comp/consumptions.js"></script>
     <script src="main-monitoring.js"></script>
     <script src="/js/comp/cmp-card-alarm.js"></script>
 </body>
