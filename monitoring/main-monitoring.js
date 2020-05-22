@@ -14,30 +14,45 @@ var app = new Vue({
             { name: "Utenze", description: "Utenze monitorabili", counter: 0 },
             { name: "Allarmi", description: "Controllo allarmi", counter: 0 },
             { name: "Grafici Acqua", description: "Grafici consumo e livello acqua", counter: 0 },
-            { name: "Grafici Utenze", description: "Grafici statistiche utenze", counter: 0 }
+            { name: "Grafici Utenze", description: "Grafici statistiche utenze", counter: 0 },
+            { name: "Fasi", description: "Fasi di depurazione", counter: 0 }
         ],
         utenze: [],
         sections: [],
         units: [],
         consumptions: [],
+        phases: 
+        [
+            { title: "fase1", description: "fase 1" },
+            { title: "fase2", description: "fase 2" },
+            { title: "fase3", description: "fase 3" },
+            { title: "fase4", description: "fase 4" }
+        ],
         water_cons: [],
         water_level: []
     },
     methods:
     {
+        sendItems: function ()
+        {
+            axios
+                .post("/php/update-mnt_items.php", this.utenze)
+                .then(response => console.log(response))
+                .catch(error => console.log(error));
+        },
         loadItems: function () 
         {
             axios
-            .get('/php/mnt_items.php')
-            .then(response => (this.utenze = response.data))
-            .catch(error => console.log(error));
+                .get('/php/mnt_items.php')
+                .then(response => (this.utenze = response.data))
+                .catch(error => console.log(error));
         },
         loadSections: function () 
         {
             axios
-            .get('/php/mnt_sections.php')
-            .then(response => (this.sections = response.data))
-            .catch(error => console.log(error))
+                .get('/php/mnt_sections.php')
+                .then(response => (this.sections = response.data))
+                .catch(error => console.log(error))
         },
         /** handler for activation menu change */
         setActiveMenu: function (name) 
@@ -64,6 +79,13 @@ var app = new Vue({
     },
     watch:
     {
+        utenze:
+        {
+            handler: function () {                
+                this.sendItems();
+            },
+            deep: true
+        },
         // whenever activeAlarmCounter changes, this function will run
         activeAlarmCounter: function (newValue, oldValue) 
         {

@@ -10,7 +10,7 @@ new Vue({
             { name: "mnt_items", loadPath: "/php/mnt_items.php", sendPath: "/php/update-mnt_items.php" },
             { name: "mnt_sections", loadPath: "/php/mnt_sections.php", sendPath: "/php/update-mnt_sections.php" },
             { name: "bdg_items", loadPath: "/php/items.php", sendPath: "/php/update-bdg_items.php" },
-            { name: "bdg_items", loadPath: "/php/sections.php", sendPath: "/php/update-bdg_sections.php" }
+            { name: "bdg_sections", loadPath: "/php/sections.php", sendPath: "/php/update-bdg_sections.php" }
         ],
         columns: [],
         tableData: [],
