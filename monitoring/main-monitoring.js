@@ -1,32 +1,24 @@
 
 
 
-
-
-
 var app = new Vue({
     el: '#app',
     data: 
     {
+        interval: Object,
         activeMenu: "Allarmi",
-        menus: 
-        [
-            { name: "Utenze", description: "Utenze monitorabili", counter: 0 },
-            { name: "Allarmi", description: "Controllo allarmi", counter: 0 },
-            { name: "Grafici", description: "Grafici e statistiche", counter: 0 },
-            { name: "Fasi", description: "Fasi di depurazione", counter: 0 }
-        ],
+        menus:
+        {
+            'Utenze': { name: "Utenze", description: "Utenze monitorabili", counter: 0, position: 0 },
+            'Allarmi': { name: "Allarmi", description: "Controllo allarmi", counter: 0, position: 0  },
+            'Grafici': { name: "Grafici", description: "Grafici e statistiche", counter: 0, position: 0 },
+            'Fasi': { name: "Fasi", description: "Fasi di depurazione", counter: 0, position: 0 }
+        },
         utenze: [],
         sections: [],
         units: [],
         consumptions: [],
-        phases: 
-        [
-            { title: "fase1", description: "fase 1" },
-            { title: "fase2", description: "fase 2" },
-            { title: "fase3", description: "fase 3" },
-            { title: "fase4", description: "fase 4" }
-        ],
+        phases: [],
         water_cons: [],
         water_level: []
     },
@@ -53,19 +45,46 @@ var app = new Vue({
                 .then(response => (this.sections = response.data))
                 .catch(error => console.log(error))
         },
+        loadPhases: function ()
+        {
+            axios
+                .get('/php/load-phases.php')
+                .then(response => (this.phases = response.data))
+                .catch(error => console.log(error))
+        },
         /** handler for activation menu change */
         setActiveMenu: function (name) 
         {
-            this.activeMenu = name;
+            this.activeMenu = name; // set active menu
+            this.setScrollPosition(name);   // set scrolling position
         },
-        moveToWarnings: function() {
-            console.log(this.menus[1].name);
-            
-            this.activeMenu = this.menus[1].name;
+        /**
+         * Set the scroll position according to
+         * the given menu
+         * @param {String} menu 
+         */
+        setScrollPosition: function (menu) {
+            $('html, body').animate({
+                scrollTop: this.menus[menu].position
+            }, 700);
+        },
+        moveToWarnings: function() {            
+            this.activeMenu = this.menus.Allarmi.name;
         },
         reloadData: function () {
             this.loadItems();
             this.loadSections();
+            this.loadPhases();
+        },
+        /**
+         * Scroll to given id element
+         * @param {String} id 
+         */
+        scrollToItem: function (id)
+        {  
+            $('html, body').animate({
+                scrollTop: $('#' +id).offset().top
+            }, 700);
         }
     },
     mounted()
@@ -75,6 +94,7 @@ var app = new Vue({
         {
             this.activeMenu = localStorage.activeMenu;
         }
+        
     },
     watch:
     {
@@ -86,9 +106,9 @@ var app = new Vue({
             deep: true
         },
         // whenever activeAlarmCounter changes, this function will run
-        activeAlarmCounter: function (newValue, oldValue) 
+        activeAlarmCounter: function () 
         {
-            this.menus[1].counter = count;
+            this.menus.Allarmi.counter = count;
         },
         /** store last active menu to the client machine */
         activeMenu(newValue)
@@ -98,6 +118,10 @@ var app = new Vue({
     },
     computed:
     {
+        isActive: function ()
+        {
+            return (name) => {   return this.activeMenu == name; }
+        },
         /** active alarms counter */
         activeAlarmCounter: function ()
         {
@@ -108,15 +132,12 @@ var app = new Vue({
             });
             return count;
         },
-        isActive() 
-        {
-            return (name) => {   return this.activeMenu == name; }
-        }
     },
     created: async function() 
     {
         this.loadItems();
         this.loadSections();
+        this.loadPhases();
         
         axios
             .get('/php/units.php')

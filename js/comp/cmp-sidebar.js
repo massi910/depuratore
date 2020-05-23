@@ -12,7 +12,7 @@ Vue.component('sidebar',
     props:
     {
         activemenu: String,
-        menus: Array
+        menus: Object
     },
     template:
     `

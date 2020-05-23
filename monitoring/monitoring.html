@@ -25,22 +25,23 @@
             <!-- content -->
             <div class="col-lg-10">
                 <!-- utenze -->
-                <menusection :section="menus[0]" v-if="isActive(menus[0].name)">
+                <menusection :section="menus.Utenze" v-if="isActive(menus.Utenze.name)">
                     <utenze v-bind:utenze="utenze" :sezioni="sections" v-on:alarm="moveToWarnings"></utenze>
                 </menusection>
                 
                 <!-- allarmi -->
-                <menusection :section="menus[1]" v-if="isActive(menus[1].name)">
+                <menusection :section="menus.Allarmi" v-if="isActive(menus.Allarmi.name)">
                     <cntalarms :utenze="utenze"></cntalarms>
                 </menusection>
 
                 <!-- grafici -->
-                <menusection :section="menus[2]" v-if="isActive(menus[2].name)">
+                <menusection :section="menus.Grafici" v-if="isActive(menus.Grafici.name)">
                     <charts :units="units" :water_cons="water_cons" :water_level="water_level"></charts>
                 </menusection>
 
-                <menusection :section="menus[3]" v-if="isActive(menus[3].name)">
-                    <cnt-phases :phases="phases"></cnt-phases>
+                <!-- fasi -->
+                <menusection :section="menus.Fasi" v-if="isActive(menus.Fasi.name)">
+                    <cnt-phases :phases="phases" :menu="menus.Fasi"></cnt-phases>
                 </menusection>
 
             </div>

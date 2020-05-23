@@ -6,14 +6,21 @@ Vue.component('general-card',
     },
     template:
     `
-    <div class="item-card border-left border-primary shadow p-2 my-4">
-        <div class="container">
-            <div class="row">
-                <slot name="title" v-bind:carditem="carditem"></slot>
+    <div class="item-card border-left border-primary shadow my-4">
+        <div class="view">        
+            
+            <!-- container -->   
+            <div class="container p-4">
+                <div class="row">
+                    <slot name="title" v-bind:carditem="carditem"></slot>
+                </div>
+                <div class="row">
+                    <slot name="body" v-bind:carditem="carditem"></slot>
+                </div>
             </div>
-            <div class="row">
-                <slot name="body" v-bind:carditem="carditem"></slot>
-            </div>
+
+            <!-- mask -->
+            <slot name="mask" v-bind:carditem="carditem"></slot>
         </div>
     </div>
     `

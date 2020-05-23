@@ -17,10 +17,10 @@ Vue.component('utenza', {
             </div>
             <div class="row py-2">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary active" @click="utenza.b_manual = '0'">
+                    <label class="btn btn-light active" @click="utenza.b_manual = '0'">
                         <input type="radio" name="options" id="option1" autocomplete="off" checked>Automatico
                     </label>
-                    <label class="btn btn-secondary" @click="utenza.b_manual = '1'">
+                    <label class="btn btn-light" @click="utenza.b_manual = '1'">
                         <input type="radio" name="options" id="option2" autocomplete="off">Manuale
                     </label>
                 </div>

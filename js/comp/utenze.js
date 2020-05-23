@@ -2,12 +2,12 @@ Vue.component('utenze', {
     template: `
     <div>
         <div class="btn-group mt-3">
-            <button class="btn btn-primary" @click="sezioneCorrente = undefined">TUTTE</button>
+            <button class="btn btn-default" @click="sezioneCorrente = undefined">TUTTE</button>
             <button 
                 v-for="sezione in sezioni"
                 :key="sezione.id" 
                 @click="setSezioneCorrente(sezione.id)" 
-                class="btn btn-primary">
+                class="btn btn-default">
                 {{sezione.name}}
             </button>
         </div>
