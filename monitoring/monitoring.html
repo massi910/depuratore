@@ -39,7 +39,7 @@
                     <water-charts :units="units" :water_cons="water_cons" :water_level="water_level"></water-charts>
                 </menusection>
                 <menusection :section="menus['Grafici Utenze']" v-if="isActive(menus['Grafici Utenze'].name)">
-                    <consumptions :utenze="utenze" :units="units" :consumptions="consumptions"></consumptions>
+                    <consumptions :utenze="utenze" :sezioni="sections" :units="units" :consumptions="consumptions"></consumptions>
                 </menusection>
 
                 <!-- fasi -->
@@ -78,6 +78,8 @@
     <script src="/js/comp/cmp-menusection.js"></script>
     <script src="/js/comp/utenza.js"></script>
     <script src="/js/comp/utenze.js"></script>
+    <script src="/js/comp/cmp-chart-bar.js"></script>
+    <script src="/js/comp/cmp-chart-line.js"></script>
     <script src="/js/comp/water-charts.js"></script>
     <script src="/js/comp/consumptions.js"></script>
     <script src="main-monitoring.js"></script>
