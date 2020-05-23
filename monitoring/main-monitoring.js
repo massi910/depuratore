@@ -11,7 +11,8 @@ var app = new Vue({
         {
             'Utenze': { name: "Utenze", description: "Utenze monitorabili", counter: 0, position: 0 },
             'Allarmi': { name: "Allarmi", description: "Controllo allarmi", counter: 0, position: 0  },
-            'Grafici': { name: "Grafici", description: "Grafici e statistiche", counter: 0, position: 0 },
+            'Grafici Acqua': { name: "Grafici Acqua", description: "Grafici consumo e livello acqua", counter: 0, position: 0 },
+            'Grafici Utenze': { name: "Grafici Utenze", description: "Grafici statistiche utenze", counter: 0, position: 0 },
             'Fasi': { name: "Fasi", description: "Fasi di depurazione", counter: 0, position: 0 }
         },
         utenze: [],

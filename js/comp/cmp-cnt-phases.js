@@ -73,8 +73,11 @@ Vue.component('cnt-phases',
          */
         scrollToItem: function (id)
         {  
+            temp = $('#' +id);
+            if (!temp.length)
+                return;
             $('html, body').animate({
-                scrollTop: $('#' +id).offset().top-10
+                scrollTop: temp.offset().top-10
             }, 500);
         },
         /**
