@@ -5,13 +5,13 @@ Vue.component('water-charts', {
         <div class="col">
             <div class="card">
                 <div class="card-header">Water Consumption</div>
-                <bar-chart style="height: 90vh" :chart-data="wcd"></bar-chart>
+                <bar-chart style="height: 80vh" :chart-data="wcd"></bar-chart>
             </div>
         </div>
         <div class="col">
             <div class="card">
                 <div class="card-header">Water Level</div>
-                <bar-chart style="height: 90vh" :chart-data="wld"></bar-chart>
+                <bar-chart style="height: 80vh" :chart-data="wld"></bar-chart>
             </div>
         </div>
     </div>
