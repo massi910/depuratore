@@ -3,16 +3,38 @@
  */
 Vue.component('sidebar',
 {
-    methods:
-    {
-        refresh: function () {         
-            this.$emit('refresh')
-          }
+    data: function () {
+        return {
+            liveOn: null
+        }
     },
     props:
     {
         activemenu: String,
         menus: Object
+    },
+    methods:
+    {
+        refresh: function () {         
+            this.$emit('refresh')
+        },
+        /**
+         * Set the refresh data
+         * interval to automatic or manual
+         */
+        liveSet: function () 
+        {
+            if (this.liveOn == null)
+            {
+                temp = setInterval(this.refresh, 2000);
+                this.liveOn = temp;
+            }
+            else
+            {
+                clearInterval(this.liveOn);
+                this.liveOn = null;
+            }
+        }
     },
     template:
     `
@@ -45,11 +67,22 @@ Vue.component('sidebar',
 
         <div class="collapse navbar-collapse mr-auto pt-2 align-items-end" id="navbarNavAltMarkup">
             <div class="navbar-nav flex-column p-4">
+            
+            <!-- refresh button -->
             <button type="button" class="btn btn-default btn-sm"
                 v-on:click="refresh"
+                v-if="liveOn == null"
                 >
-                <span class="glyphicon glyphicon-refresh"></span> Refresh
+                Refresh
             </button>
+
+            <!-- live button -->
+            <button type="button" class="btn btn-default btn-sm"
+                v-on:click="liveSet"
+                >
+                {{ liveOn == null ? 'Auto-refresh' : 'Manual-refresh' }}
+            </button>
+
             </div>
         </div>
 

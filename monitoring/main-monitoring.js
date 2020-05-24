@@ -25,6 +25,10 @@ var app = new Vue({
     },
     methods:
     {
+        ////////////////////////////////////////
+        ////////// data up/download ////////////
+        ////////////////////////////////////////
+        // Write item to db
         sendItems: function ()
         {
             axios
@@ -32,6 +36,7 @@ var app = new Vue({
                 .then(response => console.log(response))
                 .catch(error => console.log(error));
         },
+        // Load items from db
         loadItems: function () 
         {
             axios
@@ -39,6 +44,7 @@ var app = new Vue({
                 .then(response => (this.utenze = response.data))
                 .catch(error => console.log(error));
         },
+        // load items section from db
         loadSections: function () 
         {
             axios
@@ -46,6 +52,7 @@ var app = new Vue({
                 .then(response => (this.sections = response.data))
                 .catch(error => console.log(error))
         },
+        // load depuration phases from db
         loadPhases: function ()
         {
             axios
@@ -72,30 +79,21 @@ var app = new Vue({
         moveToWarnings: function() {            
             this.activeMenu = this.menus.Allarmi.name;
         },
-        reloadData: function () {
+        /**
+         * Reload data from db
+         */
+        reloadData: function () 
+        {
             this.loadItems();
             this.loadSections();
             this.loadPhases();
         },
-        /**
-         * Scroll to given id element
-         * @param {String} id 
-         */
-        scrollToItem: function (id)
-        {  
-            $('html, body').animate({
-                scrollTop: $('#' +id).offset().top
-            }, 700);
-        }
     },
     mounted()
     {
         /** get saved active menu */
         if (localStorage.activeMenu)
-        {
             this.activeMenu = localStorage.activeMenu;
-        }
-        
     },
     watch:
     {

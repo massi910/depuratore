@@ -35,6 +35,9 @@
             WHERE id = %s;
             ';
 
+        $total = count($decoded);
+        $updated = 0;
+
         foreach ($decoded as $i => $arr)    // for each row
         {
             $id = $arr['id'];
@@ -59,16 +62,21 @@
             $setter = substr($setter, 0, -1);   // remove last comma
             
             $query = sprintf($format, $table_name, $setter, $id);    // build query
-            error_log($query);
+            //error_log($query);
 
-            if ($conn->query($query) === TRUE) 
-                echo "Record with id: " . $id . " updated successfully; ";
-            else 
+            if ($conn->query($query) === TRUE)
             {
-                echo "Error updating record: " . $conn->error;
+                //echo "Record with id: " . $id . " updated successfully; ";
+                $updated++;
             }
-            
+            else
+            {
+                echo "Error updating record: " . $id . " " . $conn->error;
+            }
         }
+        
+        echo "total tuple: " . $total . " | updated tuple: " . $updated;
+        
         $conn->close();
     }
 ?>

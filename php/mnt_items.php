@@ -20,6 +20,7 @@
         $b_alarm = boolval($row['b_alarm']);
         $b_manual = boolval($row['b_manual']);
         $section_id = intval($row['section_id']);
+        $phase = intval($row['phase']);
 
         // create associative array
         $return_arr[] = array(
@@ -29,7 +30,8 @@
                         "b_status" => $b_status,
                         "b_alarm" => $b_alarm,
                         "b_manual" => $b_manual,
-                        "section_id" => $section_id
+                        "section_id" => $section_id,
+                        "phase" => $phase
                     );
     }
 
