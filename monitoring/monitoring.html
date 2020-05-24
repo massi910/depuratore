@@ -35,11 +35,20 @@
                 </menusection>
 
                 <!-- grafici -->
-                <menusection :section="menus['Grafici Acqua']" v-if="isActive(menus['Grafici Acqua'].name)">
-                    <water-charts :units="units" :water_cons="water_cons" :water_level="water_level"></water-charts>
-                </menusection>
-                <menusection :section="menus['Grafici Utenze']" v-if="isActive(menus['Grafici Utenze'].name)">
-                    <consumptions :utenze="utenze" :sezioni="sections" :units="units" :consumptions="consumptions"></consumptions>
+                <menusection :section="menus.Grafici" v-if="isActive(menus.Grafici.name)">
+                    <cnt-tabs 
+                        :regions="regions"
+                        :name="menus.Grafici.name"
+                        >
+                        <template v-slot:reg1>
+                            <consumptions :utenze="utenze" :sezioni="sections" :units="units" 
+                                :consumptions="consumptions"></consumptions>
+                        </template>
+                        <template v-slot:reg2>
+                            <water-charts :units="units" :water_cons="water_cons" 
+                                :water_level="water_level"></water-charts>
+                        </template>
+                    </cnt-tabs>
                 </menusection>
 
                 <!-- fasi -->
@@ -48,7 +57,6 @@
                 </menusection>
 
             </div>
-
         </div>
     </div>
 
@@ -71,6 +79,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>    
     <script src="/js/comp/cmp-cnt-phases.js"></script>
+    <script src="/js/comp/cmp-tabs.js"></script>
     <script src="/js/comp/cmp-general-card.js"></script>
     <script src="/js/comp/cmp-cnt-alarms.js"></script>
     <script src="/js/comp/cmp-sidemenuitem.js"></script>
@@ -84,9 +93,6 @@
     <script src="/js/comp/consumptions.js"></script>
     <script src="main-monitoring.js"></script>
     <script src="/js/comp/cmp-card-alarm.js"></script>
-    
-    
-    
     
     
 </body>
