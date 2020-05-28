@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel src/example.html",
     "build": "parcel build src/example.html",
-    "watch": "parcel watch src/home.html",
+    "watch": "(mkdir dist; cp -R src/php dist/php); parcel watch src/home/home.html",
     "cp-php": "cp -R src/php dist/php",
     "clean": "rm -R dist"
   },
@@ -34,6 +34,7 @@
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "style": "0.0.3",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4"
   },

@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import * as models from "../js/models"
-import "/style/general.css"
+import "../style/general.css"
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap'
 
