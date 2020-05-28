@@ -1,0 +1,75 @@
+/* general styles */
+
+
+:root
+{--navBar-height: 0px;}
+.cnt-rel
+{position: relative;}
+.default-padding
+{padding: 16px;}
+
+/* top header */
+.logo
+{
+    font-size: 3rem;
+    font-family: Impact, Charcoal, sans-serif;
+    color: black;
+}
+.top-header-info
+{
+    position: absolute;
+    bottom: 0;
+}
+
+/* calculator card */
+.sticky-calc-card
+{
+    position: sticky;
+    top: var(--navBar-height);
+}
+
+/* budgeting */
+.selected-item
+{
+    font-size: initial;
+}
+
+@media (min-width: 576px)
+{
+    .card-alarm
+    {
+        min-width: 32rem;
+    }
+}
+
+
+@media (max-width: 576px)
+{ 
+    /* alarms */
+    .card-alarm
+    {
+        min-width: auto;
+    }
+}
+
+
+/* sidebar */
+#sidebar
+{
+    min-height: 100vh;
+}
+
+@media (max-width: 992px)
+{ 
+    #sidebar
+    {
+        min-height: auto;
+    }
+}
+
+.anchor-extended
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}

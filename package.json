@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel src/example.html",
     "build": "parcel build src/example.html",
-    "watch": "parcel watch src/example/example.html",
+    "watch": "parcel watch src/home.html",
     "cp-php": "cp -R src/php dist/php",
     "clean": "rm -R dist"
   },
@@ -29,7 +29,11 @@
     "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
+    "axax": "^0.2.2",
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4"
   },
