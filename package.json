@@ -1,0 +1,39 @@
+{
+  "name": "depuratore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/example.html",
+    "build": "parcel build src/example.html",
+    "watch": "parcel watch src/example/example.html",
+    "cp-php": "cp -R src/php dist/php",
+    "clean": "rm -R dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/massi910/depuratore.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/massi910/depuratore/issues"
+  },
+  "homepage": "https://github.com/massi910/depuratore#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.0",
+    "@babel/plugin-transform-runtime": "^7.10.0",
+    "@vue/component-compiler-utils": "^3.1.2",
+    "parcel-bundler": "^1.12.4",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "vue": "^2.6.11",
+    "vue-hot-reload-api": "^2.3.4"
+  },
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
+  }
+}
