@@ -32,17 +32,18 @@
 
                 <!-- grafici -->
                 <menusection :section="menus.Grafici" v-if="isActive(menus.Grafici.name)">
-                    <cnttabs 
-                        :regions="regions"
-                        :name="menus.Grafici.name"
-                        >
+                    <cnttabs :regions="regions" :name="menus.Grafici.name">
                         <template v-slot:reg1>
-                            <consumptions :utenze="utenze" :sezioni="sections" :units="units" 
-                                :consumptions="consumptions"></consumptions>
+                            <consumptions :utenze="utenze" :units="units" :consumptions="consumptions"></consumptions>
                         </template>
                         <template v-slot:reg2>
-                            <watercharts :units="units" :water_cons="water_cons" 
-                                :water_level="water_level"></watercharts>
+                            <consumptions-items :utenze="utenze" :sezioni="sections" :units="units" :consumptions="consumptions"></consumptions-items>
+                        </template>
+                        <template v-slot:reg3>
+                            <water-cons :units="units" :water_cons="water_cons"></water-cons>
+                        </template>
+                        <template v-slot:reg4>
+                            <water-level :units="units" :water_level="water_level"></water-level>
                         </template>
                     </cnttabs>
                 </menusection>

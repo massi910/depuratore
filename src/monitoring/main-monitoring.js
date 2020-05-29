@@ -9,7 +9,9 @@ import utenze from '../js/comp/utenze'
 import cntphases from '../js/comp/cmp-cnt-phases'
 import cnttabs from '../js/comp/cmp-tabs'
 import consumptions from '../js/comp/consumptions'
-import watercharts from '../js/comp/water-charts'
+import consumptionsItems from '../js/comp/consumptions-items'
+import waterCons from '../js/comp/water-cons'
+import waterLevel from '../js/comp/water-level'
 import axios from 'axios'
 import Vue from 'vue'
 import $ from 'jquery'
@@ -28,7 +30,9 @@ var app = new Vue({
         cntphases,
         cnttabs,
         consumptions,
-        watercharts
+        consumptionsItems,
+        waterCons,
+        waterLevel
     },
     data: 
     {
@@ -41,7 +45,12 @@ var app = new Vue({
             'Fasi': { name: "Fasi", description: "Fasi di depurazione", counter: 0, position: 0 },
             'Grafici': { name: "Grafici", description: "Grafici dei consumi", counter: 0, position: 0 }
         },
-        regions: [ {id: 'reg1', name: 'Consumo elettrico'}, {id: 'reg2', name: 'Consumo acqua'} ],
+        regions: [ 
+            {id: 'reg1', name: 'Consumo elettrico'},
+            {id: 'reg2', name: 'Consumo elettrico / utenza'},
+            {id: 'reg3', name: 'Consumo acqua'},
+            {id: 'reg4', name: 'Livello acqua'}
+        ],
         utenze: [],
         sections: [],
         units: [],

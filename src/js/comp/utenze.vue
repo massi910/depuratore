@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="btn-group btn-toolbar btn-group-toggle mt-3">
+        <div class="btn-group btn-toolbar btn-group-toggle pt-3 sticky-top">
             <button class="btn btn-default" :class="{ active : sezioneCorrente ==  undefined }" @click="sezioneCorrente = undefined">TUTTE</button>
             <button 
                 v-for="sezione in sezioni"
