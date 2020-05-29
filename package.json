@@ -40,7 +40,8 @@
     "style": "0.0.3",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.0",
-    "vue-hot-reload-api": "^2.3.4"
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-tables-2": "^2.0.27"
   },
   "alias": {
     "vue": "./node_modules/vue/dist/vue.common.js"

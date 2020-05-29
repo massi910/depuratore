@@ -4,7 +4,7 @@
         
         <!-- navbar header -->
         <div class="container-fluid bg-secondary p-3">
-            <a class="navbar-brand mx-auto" href="#">Depuratore MD1</a>
+            <a class="navbar-brand mx-auto" href="../../home/home.html">Depuratore MD1</a>
         </div>
         
         <!-- collapse for smaller screens -->
@@ -29,6 +29,12 @@
         <div class="collapse navbar-collapse mr-auto pt-2 align-items-end" id="navbarNavAltMarkup">
             <div class="navbar-nav flex-column p-4">
             
+            
+            <a type="button" class="btn btn-default btn-sm" href="../../tables/vue-tables.html">
+                tables
+            </a>
+            
+
             <!-- refresh button -->
             <button type="button" class="btn btn-default btn-sm"
                 v-on:click="refresh"

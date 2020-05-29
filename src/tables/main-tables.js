@@ -2,10 +2,9 @@ import 'mdbootstrap/css/mdb.min.css'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../style/general.css'
-import axios from 'axios'
 import Vue from 'vue'
-import $ from 'jquery'
-
+import axios from 'axios'
+import VueTables from 'vue-tables-2';
 
 Vue.use(VueTables.ClientTable);
 
