@@ -2,23 +2,23 @@
     <div class="container-fluid">
         <div class="card mt-3 mb-3">
             <div class="card-header">General Consumptions</div>
-            <linechart style="height: 50vh;" :chart-data="cons"></linechart>
+            <linechart style="height: 50vh;" :chart-data="consumptionsData"></linechart>
         </div>
 
-        <div class="btn-group btn-group-toggle mb-3">
-            <button class="btn btn-default" :class="{ active : sezioneCorrente ==  undefined }" @click="sezioneCorrente = undefined">TUTTE</button>
+        <div class="btn-group btn-toolbar btn-group-toggle mb-3">
+            <button class="btn btn-default" :class="{ active : sezioneCorrente == undefined }" @click="sezioneCorrente = undefined">TUTTE</button>
             <button 
                 v-for="sezione in sezioni"
                 :key="sezione.id" 
                 @click="setSezioneCorrente(sezione.id)" 
                 class="btn btn-default"
-                :class="{ active : sezioneCorrente ==  sezione.id }">
+                :class="{ active : sezioneCorrente == sezione.id }">
                 {{sezione.name}}
             </button>
         </div>
-        <div class="card mb-3" v-for="utenza in utenzeAttive" :key="utenza.id">
+        <div class="card mb-3" v-for="utenza in utenzeAttive" :key="utenza.name">
             <div class="card-header">{{utenza.name}}</div>
-            <barchart style="height: 45vh;" :chart-data="buildChartData(utenza)"></barchart>
+            <barchart style="height: 45vh;" :chart-data="chartsData[utenza.id]"></barchart>
         </div>
     </div>
 </template>
@@ -63,12 +63,12 @@ export default {
         dates: function() {
             return this.consumptions.map(e => e.date)
         },
-        cons: function() {
+        consumptionsData: function() {
             var data = {
                 labels: this.dates,
                 datasets: []
             }
-            for (var utenza of this.utenze)
+            for (const utenza of this.utenze)
             {
                 data.datasets.push({
                     fill: false,
@@ -79,22 +79,28 @@ export default {
                 })
             }
             return data
+        },
+        chartsData: function() {
+            var dataArray = {}
+            for (const utenza of this.utenze)
+            {
+                dataArray[utenza.id] = {
+                    labels: this.dates,
+                    datasets:[{
+                        fill: false,
+                        backgroundColor: this.colorArray[utenza.id],
+                        label: utenza.name,
+                        // TO-DO: 0 = valore per testare il funzionamento -> sarà null
+                        data: this.consumptions.map(e => this.dates.includes(e.date) && e.id_item == utenza.id ? e.cons : 12 )
+                    }]
+                }
+            }
+            return dataArray
         }
     },
     methods: {
         setSezioneCorrente: function(sezione) {            
             this.sezioneCorrente = sezione
-        },
-        buildChartData: function(utenza) {
-            return {
-                labels: this.dates,
-                datasets: [{
-                    backgroundColor: this.colorArray[utenza.id],
-                    label: utenza.name,
-                    // TO-DO: 12 = valore per testare il funzionamento -> sarà null
-                    data: this.consumptions.map(e => this.dates.includes(e.date) && e.id_item == utenza.id ? e.cons : 12 ) 
-                }]
-            }
         }
     }
 }
