@@ -31,7 +31,7 @@ Vue.component('bar-chart',{
             }
         }
     },
-    mounted(){
+    mounted: function(){
         this.renderChart(this.chartData, this.options)
     }
 })
