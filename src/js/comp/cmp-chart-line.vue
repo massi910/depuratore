@@ -1,12 +1,16 @@
-Vue.component('bar-chart',{
-    extends: VueChartJs.Bar,
+
+<script>
+import VueChartJs from 'vue-chartjs'
+
+export default {
+    extends: VueChartJs.Line,
     mixins: [VueChartJs.mixins.reactiveProp],
     data: function() {
         return {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                legend: {display : false},
+                legend: {display : true},
                 scales: {
                     xAxes: [{
                         display: true,
@@ -16,13 +20,9 @@ Vue.component('bar-chart',{
                     }],
                     yAxes: [{
                         display: true,
-                        ticks: {
-                            suggestedMin: 0,
-                            suggestedMax: 100
-                        },
                         scaleLabel: {
                             display: true,
-                            labelString: 'lt - litri',
+                            labelString: 'kW',
                             lineHeight: '3em',
                             fontSize: '15'
                         }
@@ -34,4 +34,5 @@ Vue.component('bar-chart',{
     mounted(){
         this.renderChart(this.chartData, this.options)
     }
-})
+}
+</script>

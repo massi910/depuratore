@@ -1,9 +1,8 @@
-Vue.component('consumptions', {
-    template: `
+<template>
     <div class="container-fluid">
         <div class="card mt-3 mb-3">
             <div class="card-header">General Consumptions</div>
-            <line-chart style="height: 50vh;" :chart-data="cons"></line-chart>
+            <linechart style="height: 50vh;" :chart-data="cons"></linechart>
         </div>
 
         <div class="btn-group btn-group-toggle mb-3">
@@ -19,10 +18,21 @@ Vue.component('consumptions', {
         </div>
         <div class="card mb-3" v-for="utenza in utenzeAttive" :key="utenza.id">
             <div class="card-header">{{utenza.name}}</div>
-            <bar-chart style="height: 45vh;" :chart-data="buildChartData(utenza)"></bar-chart>
+            <barchart style="height: 45vh;" :chart-data="buildChartData(utenza)"></barchart>
         </div>
     </div>
-    `,
+</template>
+
+<script>
+import barchart from './cmp-chart-bar'
+import linechart from './cmp-chart-line'
+
+export default {
+    components:
+    {
+        barchart,
+        linechart
+    },
     props: {
         utenze: Array,
         sezioni: Array,
@@ -54,11 +64,11 @@ Vue.component('consumptions', {
             return this.consumptions.map(e => e.date)
         },
         cons: function() {
-            data = {
+            var data = {
                 labels: this.dates,
                 datasets: []
             }
-            for (utenza of this.utenze)
+            for (var utenza of this.utenze)
             {
                 data.datasets.push({
                     fill: false,
@@ -87,4 +97,5 @@ Vue.component('consumptions', {
             }
         }
     }
-})
+}
+</script>

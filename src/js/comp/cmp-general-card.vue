@@ -1,11 +1,4 @@
-Vue.component('general-card',
-{
-    props:
-    {
-        carditem: Object
-    },
-    template:
-    `
+<template>
     <div class="item-card border-left border-primary shadow my-4">
         <div class="view">        
             
@@ -23,5 +16,14 @@ Vue.component('general-card',
             <slot name="mask" v-bind:carditem="carditem"></slot>
         </div>
     </div>
-    `
-})
+</template>
+
+
+<script>
+export default {
+    props:
+    {
+        carditem: Object
+    }
+}
+</script>

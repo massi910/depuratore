@@ -1,5 +1,4 @@
-Vue.component('utenze', {
-    template: `
+<template>
     <div>
         <div class="btn-group btn-group-toggle mt-3">
             <button class="btn btn-default" :class="{ active : sezioneCorrente ==  undefined }" @click="sezioneCorrente = undefined">TUTTE</button>
@@ -13,7 +12,18 @@ Vue.component('utenze', {
             </button>
         </div>
         <utenza v-on="$listeners" v-for="utenza in utenzeAttive" v-bind:utenza="utenza" v-bind:key="utenza.id"></utenza>
-    </div>`,
+    </div>
+</template>
+
+
+<script>
+import utenza from './utenza'
+
+export default {
+    components:
+    {
+        utenza
+    },
     props: 
     {
         utenze: Array,
@@ -41,4 +51,5 @@ Vue.component('utenze', {
             this.sezioneCorrente = sezione
         }
     },
-})
+}
+</script>

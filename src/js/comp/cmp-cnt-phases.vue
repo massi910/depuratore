@@ -1,8 +1,44 @@
+<template>
+    <div id="cntphases" class="container">
+        <generalcard
+            v-for="phase in phases"
+            :key="phase.name"
+            :carditem="phase"
+            :id="buildPhaseId(phase.id)"
+            >
+            <template v-slot:title="props">
+                <div>
+                    <h2> {{ props.carditem.name }} </h2>
+                </div>
+                
+            </template>
+
+            <template v-slot:body="props">
+                {{ props.carditem.description }}
+            </template>
+
+            <template v-slot:mask="props">
+                <div class="mask flex-center rgba-green-light p-0"
+                v-if="props.carditem.active">
+                </div>
+            </template>
+        </generalcard>
+    </div>
+</template>
+
+
+<script>
+import generalcard from './cmp-general-card'
+import $ from 'jquery'
+
 /**
  * Container for depuration phases
  */
-Vue.component('cnt-phases',
-{
+export default {
+    components:
+    {
+        generalcard
+    },
     data: function () 
     {
         return{
@@ -37,7 +73,7 @@ Vue.component('cnt-phases',
             handler: function ()
             {
                 setTimeout(() => {
-                        temp = this.buildPhaseId(this.activePhase.id);
+                        var temp = this.buildPhaseId(this.activePhase.id);
                         this.scrollToItem(temp);
                     },
                     1000);
@@ -73,7 +109,7 @@ Vue.component('cnt-phases',
          */
         scrollToItem: function (id)
         {  
-            temp = $('#' +id);
+            var temp = $('#' +id);
             if (!temp.length)
                 return;
             $('html, body').animate({
@@ -100,33 +136,6 @@ Vue.component('cnt-phases',
             
             return this.phases[0];
         }
-    },
-    template:
-    `
-    <div id="cntphases" class="container">
-        <general-card
-            v-for="phase in phases"
-            :key="phase.name"
-            :carditem="phase"
-            :id="buildPhaseId(phase.id)"
-            >
-            <template v-slot:title="props">
-                <div>
-                    <h2> {{ props.carditem.name }} </h2>
-                </div>
-                
-            </template>
-
-            <template v-slot:body="props">
-                {{ props.carditem.description }}
-            </template>
-
-            <template v-slot:mask="props">
-                <div class="mask flex-center rgba-green-light p-0"
-                v-if="props.carditem.active">
-                </div>
-            </template>
-        </general-card>
-    </div>
-    `
-})
+    }
+}
+</script>

@@ -43,7 +43,7 @@ Vue.component('sidebar',
         
         <!-- navbar header -->
         <div class="container-fluid bg-secondary p-3">
-            <a class="navbar-brand mx-auto" href="/home.html">Depuratore MD1</a>
+            <a class="navbar-brand mx-auto" href="../home/home.html">Depuratore MD1</a>
         </div>
         
         <!-- collapse for smaller screens -->

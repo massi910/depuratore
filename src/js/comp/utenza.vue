@@ -1,26 +1,4 @@
-async function saveStatus() {
-    const response = await fetch("/pozzo.php", {
-        method: 'POST',
-        body: JSON.stringify(app.utenze)
-    })
-    const data = response.json()
-    return data
-}
-
-Vue.component('utenza', {
-    props: {
-        utenza:
-        {
-            id: Number,
-            name: String,
-            description: String,
-            b_status: Boolean,
-            b_alarm: Boolean,
-            b_manual: Boolean,
-            section_id: Number
-        }
-    },
-    template: `
+<template>
     <div class="item-card border-left border-primary shadow p-2 my-4">
         <div class="container">
             <div class="row">
@@ -46,7 +24,23 @@ Vue.component('utenza', {
                 <button class="btn btn-warning" @click="alarm">Allarme</button>
             </div>
         </div>
-    </div>`,
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        utenza:
+        {
+            id: Number,
+            name: String,
+            description: String,
+            b_status: Boolean,
+            b_alarm: Boolean,
+            b_manual: Boolean,
+            section_id: Number
+        }
+    },
     methods: {
         updateStatus: function() {
             this.utenza.b_status = !this.utenza.b_status
@@ -55,5 +49,5 @@ Vue.component('utenza', {
             this.$emit('alarm')
         }
     }
-})
-
+}
+</script>

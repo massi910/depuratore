@@ -1,22 +1,30 @@
-Vue.component('water-charts', {
-    template: `
+<template>
     <div>
-    <div class="row h-50px mt-3">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">Water Consumption</div>
-                <bar-chart style="height: 80vh" :chart-data="wcd"></bar-chart>
+        <div class="row h-50px mt-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Water Consumption</div>
+                    <barchart style="height: 80vh" :chart-data="wcd"></barchart>
+                </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-header">Water Level</div>
-                <bar-chart style="height: 80vh" :chart-data="wld"></bar-chart>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Water Level</div>
+                    <barchart style="height: 80vh" :chart-data="wld"></barchart>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-    `,
+</template>
+
+<script>
+import barchart from './cmp-chart-bar'
+
+export default {
+    components:
+    {
+        barchart
+    },
     props: {
         units: Array,
         water_cons: Array,
@@ -44,4 +52,5 @@ Vue.component('water-charts', {
             }
         }
     }
-})
+}
+</script>

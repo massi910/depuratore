@@ -1,12 +1,16 @@
-Vue.component('line-chart',{
-    extends: VueChartJs.Line,
+
+<script>
+import VueChartJs from 'vue-chartjs'
+
+export default {
+    extends: VueChartJs.Bar,
     mixins: [VueChartJs.mixins.reactiveProp],
     data: function() {
         return {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                legend: {display : true},
+                legend: {display : false},
                 scales: {
                     xAxes: [{
                         display: true,
@@ -16,9 +20,13 @@ Vue.component('line-chart',{
                     }],
                     yAxes: [{
                         display: true,
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        },
                         scaleLabel: {
                             display: true,
-                            labelString: 'kW',
+                            labelString: 'lt - litri',
                             lineHeight: '3em',
                             fontSize: '15'
                         }
@@ -30,4 +38,5 @@ Vue.component('line-chart',{
     mounted(){
         this.renderChart(this.chartData, this.options)
     }
-})
+}
+</script>
