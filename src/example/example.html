@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+        <h1> prova parcel </h1>
+        {{ msg }}
+
+        <hr>
+        <cmpfirst :msg="msg">
+
+        </cmpfirst>
+        <hr>
+        <cmp-single-file :msg="msg">
+
+        </cmp-single-file>
+        <hr>
+        <button v-on:click="go()">go</button>
+
+        <a href="es2/example2.html"> vai a esempio 2</a>
+    </div>
+    <script src="main-example.js"></script>
+</body>
+</html>

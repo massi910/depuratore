@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring</title>
+    
+    
+</head>
+<body>
+    <div id="app" class="container-fluid">
+        <div class="row">
+            <!-- sidebar -->
+            <div class="col-lg-2 p-0">
+                <sidebar :menus="menus" :activemenu="activeMenu" 
+                    v-on:activation="setActiveMenu"
+                    v-on:refresh="reloadData"
+                ></sidebar>
+            </div>
+
+            <!-- content -->
+            <div class="col-lg-10">
+                <!-- utenze -->
+                <menusection :section="menus.Utenze" v-if="isActive(menus.Utenze.name)">
+                    <utenze v-bind:utenze="utenze" :sezioni="sections" v-on:alarm="moveToWarnings"></utenze>
+                </menusection>
+                
+                <!-- allarmi -->
+                <menusection :section="menus.Allarmi" v-if="isActive(menus.Allarmi.name)">
+                    <cntalarms :utenze="utenze"></cntalarms>
+                </menusection>
+
+                <!-- grafici -->
+                <menusection :section="menus.Grafici" v-if="isActive(menus.Grafici.name)">
+                    <cnttabs :regions="regions" :name="menus.Grafici.name">
+                        <template v-slot:reg1>
+                            <consumptions :utenze="utenze" :units="units" :consumptions="consumptions"></consumptions>
+                        </template>
+                        <template v-slot:reg2>
+                            <consumptions-items :utenze="utenze" :sezioni="sections" :units="units" :consumptions="consumptions"></consumptions-items>
+                        </template>
+                        <template v-slot:reg3>
+                            <water-cons :units="units" :water_cons="water_cons"></water-cons>
+                        </template>
+                        <template v-slot:reg4>
+                            <water-level :units="units" :water_level="water_level"></water-level>
+                        </template>
+                    </cnttabs>
+                </menusection>
+
+                <!-- fasi -->
+                <menusection :section="menus.Fasi" v-if="isActive(menus.Fasi.name)">
+                    <cntphases :phases="phases" :menu="menus.Fasi"></cntphases>
+                </menusection>
+
+            </div>
+        </div>
+    </div>
+    
+    <script src="main-monitoring.js"></script>
+    
+</body>
+</html>

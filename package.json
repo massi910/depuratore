@@ -1,0 +1,50 @@
+{
+  "name": "depuratore",
+  "version": "1.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -R dist",
+    "cp-static": "mkdir dist; cp -R src/php dist/php; cp -R src/images/ dist/images",
+    "dev": "parcel src/example.html",
+    "build": "parcel build src/example.html",
+    "watch": "npm run cp-static ; parcel watch src/home/home.html",
+    "cp-php": "cp -R src/php dist/php"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/massi910/depuratore.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/massi910/depuratore/issues"
+  },
+  "homepage": "https://github.com/massi910/depuratore#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@vue/component-compiler-utils": "^3.1.2",
+    "parcel-bundler": "^1.12.4",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "dependencies": {
+    "axax": "^0.2.2",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "chart.js": "^2.9.3",
+    "jquery": "^3.5.1",
+    "js": "^0.1.0",
+    "mdbootstrap": "^4.19.0",
+    "popper.js": "^1.16.1",
+    "style": "0.0.3",
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-tables-2": "^2.0.27"
+  },
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
+  }
+}

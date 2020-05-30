@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventivazione</title>
+</head>
+
+<body>
+    <!-- top header -->
+    <div class="container-fluid bg-light">
+        <div class="row">
+            <div class="col-lg-6">
+                <a class="text-decoration-none logo" href="../home/home.html">Depuratore(logo)</a>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block d-lg-flex align-items-end flex-column default-padding">
+                <div class="mt-lg-auto">
+                    depuratore sperimentale con filtri a sabbia
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- top navigation bar -->
+    <nav id="top-bar" class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/home.html">Home</a>
+                <a class="nav-item nav-link active" href="#">Preventivazione
+                    <span class="sr-only">(current)</span></a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="#">Info</a>
+                <a class="nav-item nav-link" href="#">Contatti</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 p-3">
+                
+                <div class="accordion" id="pvAccordion">
+                    
+                    <!-- card1 sample
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <button class="btn btn-block btn-lg btn-light" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">        
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <h4>Vasca contenitore</h4>
+                                    </div>
+                                </div>
+                                <div class="row selected-item">
+                                    <div class="col-lg-10 text-left">
+                                        nessuno
+                                    </div>
+                                    <div class="col-lg-2 text-right">
+                                        
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#pvAccordion">
+                            <div class="container p-4">
+                                <button class="btn btn-outline-secondary btn-block pv-btn-item">
+                                    <div class="row">
+                                        <div class="col text-left pv-el-info">
+                                            Vasca in Moplen
+                                        </div>
+                                        <div class="col-md-2 text-right pv-el-money">
+                                            150.00
+                                        </div>
+                                    </div>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-block pv-btn-item">
+                                    <div class="row">
+                                        <div class="col text-left pv-el-info">
+                                            Vasca in alluminio
+                                        </div>
+                                        <div class="col-md-2 text-right pv-el-money">
+                                            100.00
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                
+                </div>
+            </div>
+
+            <!-- payment summary -->
+            <div class="col-lg-4 p-3">
+                <div id="calc-card" class="container border rounded border-dark">
+                    <div class="row bg-secondary">
+                        <div class="col-sm p-2">
+                            <h3 class="text-white">Riepilogo</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 p-2">
+                            Prezzo base
+                        </div>
+                        <div id="base-price" class="col-6 text-right p-2">
+                            20
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 p-2">
+                            Il tuo prezzo
+                        </div>
+                        <div id="current-price" class="col-6 text-right p-2">
+                            120.00
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col p-2">
+                            <button class="btn btn-block btn-success">
+                                Aggiungi al carrello
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main-budgeting.js"></script>
+</body>
+</html>

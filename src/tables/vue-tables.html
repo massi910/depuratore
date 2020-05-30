@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app" class="container-fluid">
+        <!-- update button -->
+        <button class="btn btn-dark" v-on:click="load"> aggiorna </button>
+        <!-- table selector buttons -->
+        <button class="btn border-secondary"
+            v-for="table in tables"
+            :key="table.name"
+            v-on:click="setTable(table)"
+        > {{ table.name }} </button>
+        
+        <hr>
+        <v-client-table :columns="columns" :options="options" v-model="tableData">
+            <!-- 
+                for each slot set up these func:
+                update text on submit + toggle editable state + revert to original value on cancel 
+            -->
+            <template v-for="col in columns" :slot="col" slot-scope="{row, update, setEditing, isEditing, revertValue}">
+                <div :key="col">
+                    <span @click="setEditing(true)" v-if="!isEditing()">
+                        {{row[col]}}
+                    </span>
+                    <span v-else>
+                    <input type="text" v-model="row[col]">
+                    <button type="button" @click="update(row[col]); setEditing(false)">Submit</button>
+                    <button type="button" @click="revertValue(); setEditing(false)">Cancel</button>        
+                    </span>
+                </div>
+            </template>
+        
+        </v-client-table>
+    </div>
+    <script src="main-tables.js"></script>
+</body>
+</html>
