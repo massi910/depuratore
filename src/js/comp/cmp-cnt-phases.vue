@@ -42,8 +42,7 @@ export default {
     data: function () 
     {
         return{
-            activePhase: this.phases[0],
-            scrollPosition: Object,
+            activePhase: null,
         }
     },
     props:
@@ -53,54 +52,57 @@ export default {
             type: Array,
             default: []
         },
-        // container menu
-        menu: Object
+        // container item menu
+        item: Object,
+        // if true, this component is currently showing
+        isActive: Boolean
     },
     watch:
     {
-        // what phases and eventually update active phase
-        phases: 
+        phases:
         {
+            // update the active phase
             handler: function () {
                 this.activePhase = this.getFirstActive();
             },
             deep: true,
-            immediate: true
         },
-        // watch current active phase and eventually scroll to it
         activePhase:
         {
-            handler: function ()
-            {
-                setTimeout(() => {
-                        var temp = this.buildPhaseId(this.activePhase.id);
-                        this.scrollToItem(temp);
-                    },
-                    1000);
-                    this.saveCurrentPosition();
-                
-            },
-            deep: true,
-            immediate: true
+            // update the scroll position
+            handler: function () {
+                this.updateScrollPosition();
+            }
         },
-        // watch the scroll position to change menu value
-        scrollPosition:
+        isActive:
         {
-            handler: function (e) {
-                this.menu.position = this.scrollPosition;
+            // update the scroll position
+            // when this component is displayed
+            handler: function () {
+                if (this.isActive)
+                    this.updateScrollPosition();
             }
         }
     },
     methods:
     {
         /**
-         * save the current position
+         * Set the menu item scroll position.
+         * The first active phase will be on top
          */
-        saveCurrentPosition: function () {
-            setTimeout(() => {
-                this.scrollPosition = window.pageYOffset;
-                },
-                2000);
+        updateScrollPosition: function () {
+            if (this.activePhase == null)
+                return;
+            var temp = this.buildPhaseId(this.activePhase.id);
+            this.item.scrollPosition = this.getElPosition(temp);
+        },
+        getElPosition: function(id)
+        {
+            var temp = $('#' +id);
+            if (!temp.length)
+                return 0;
+            else
+                return temp.offset().top-24
         },
         /**
          * Scroll to given id element
@@ -113,7 +115,7 @@ export default {
             if (!temp.length)
                 return;
             $('html, body').animate({
-                scrollTop: temp.offset().top-10
+                scrollTop: temp.offset().top-24
             }, 500);
         },
         /**
@@ -136,6 +138,15 @@ export default {
             
             return this.phases[0];
         }
+    },
+    mounted()
+    {
+        // set the scroll position when all phases are rendered
+        var instance = this;
+        setTimeout(function(){
+            instance.updateScrollPosition()
+            }, 2000);
+        
     }
 }
 </script>

@@ -2,9 +2,8 @@ import 'mdbootstrap/css/mdb.min.css'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../style/general.css'
-import sidebar from '../js/comp/cmp-sidebar'
+import sidebarpage from '../js/comp/cmp-sidebarpage'
 import cntalarms from '../js/comp/cmp-cnt-alarms'
-import menusection from '../js/comp/cmp-menusection'
 import utenze from '../js/comp/utenze'
 import cntphases from '../js/comp/cmp-cnt-phases'
 import cnttabs from '../js/comp/cmp-tabs'
@@ -18,33 +17,29 @@ import $ from 'jquery'
 
 
 
-
 var app = new Vue({
-    el: '#app',
     components:
     {
-        sidebar,
+        sidebarpage,
         cntalarms,
-        menusection,
         utenze,
         cntphases,
         cnttabs,
         consumptions,
         consumptionsItems,
         waterCons,
-        waterLevel
+        waterLevel,
     },
-    data: 
+    el: '#app',
+    data:
     {
-        interval: Object,
-        activeMenu: "Allarmi",
-        menus:
-        {
-            'Utenze': { name: "Utenze", description: "Utenze monitorabili", counter: 0, position: 0 },
-            'Allarmi': { name: "Allarmi", description: "Controllo allarmi", counter: 0, position: 0  },
-            'Fasi': { name: "Fasi", description: "Fasi di depurazione", counter: 0, position: 0 },
-            'Grafici': { name: "Grafici", description: "Grafici dei consumi", counter: 0, position: 0 }
-        },
+        menu:
+        [
+            { name: "Utenze" },
+            { name: "Allarmi" },
+            { name: "Fasi" },
+            { name: "Grafici" },
+        ],
         regions: [ 
             {id: 'reg1', name: 'Consumo elettrico'},
             {id: 'reg2', name: 'Consumo elettrico / utenza'},
@@ -58,6 +53,16 @@ var app = new Vue({
         phases: [],
         water_cons: [],
         water_level: [],
+    },
+    watch:
+    {
+        utenze:
+        {
+            handler: function () {                
+                this.sendItems();
+            },
+            deep: true
+        },
     },
     methods:
     {
@@ -96,25 +101,6 @@ var app = new Vue({
                 .then(response => (this.phases = response.data))
                 .catch(error => console.log(error))
         },
-        /** handler for activation menu change */
-        setActiveMenu: function (name) 
-        {
-            this.activeMenu = name; // set active menu
-            this.setScrollPosition(name);   // set scrolling position
-        },
-        /**
-         * Set the scroll position according to
-         * the given menu
-         * @param {String} menu 
-         */
-        setScrollPosition: function (menu) {
-            $('html, body').animate({
-                scrollTop: this.menus[menu].position
-            }, 700);
-        },
-        moveToWarnings: function() {            
-            this.activeMenu = this.menus.Allarmi.name;
-        },
         /**
          * Reload data from db
          */
@@ -125,54 +111,9 @@ var app = new Vue({
             this.loadPhases();
         },
     },
-    mounted()
-    {
-        /** get saved active menu */
-        if (localStorage.activeMenu)
-            this.activeMenu = localStorage.activeMenu;
-    },
-    watch:
-    {
-        utenze:
-        {
-            handler: function () {                
-                this.sendItems();
-            },
-            deep: true
-        },
-        // whenever activeAlarmCounter changes, this function will run
-        activeAlarmCounter: function () 
-        {
-            this.menus.Allarmi.counter = this.activeAlarmCounter;
-        },
-        /** store last active menu to the client machine */
-        activeMenu(newValue)
-        {
-            localStorage.activeMenu = newValue;
-        }
-    },
-    computed:
-    {
-        isActive: function ()
-        {
-            return (name) => {   return this.activeMenu == name; }
-        },
-        /** active alarms counter */
-        activeAlarmCounter: function ()
-        {
-            var count = 0;
-            this.utenze.forEach(utenza => {
-                if (utenza.b_alarm == true)
-                    count++;
-            });
-            return count;
-        },
-    },
     created: async function() 
     {
-        this.loadItems();
-        this.loadSections();
-        this.loadPhases();
+        this.reloadData();
         
         axios
             .get('/php/units.php')
@@ -191,4 +132,4 @@ var app = new Vue({
             .then(response => this.water_level = response.data)
             .catch(error => console.log(error))
     }
-});
+})
