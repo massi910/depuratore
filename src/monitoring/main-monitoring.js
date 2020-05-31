@@ -11,6 +11,7 @@ import consumptions from '../js/comp/consumptions'
 import consumptionsItems from '../js/comp/consumptions-items'
 import waterCons from '../js/comp/water-cons'
 import waterLevel from '../js/comp/water-level'
+import activeItems from '../js/comp/cmp-progress-bar-active-items'
 import axios from 'axios'
 import Vue from 'vue'
 import $ from 'jquery'
@@ -29,6 +30,7 @@ var app = new Vue({
         consumptionsItems,
         waterCons,
         waterLevel,
+        activeItems
     },
     el: '#app',
     data:
