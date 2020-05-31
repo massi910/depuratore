@@ -1,5 +1,18 @@
 <template>
     <div class="item-card border-left border-primary shadow p-2 my-4">
+        <div class="float-right p-2">
+            <span class="">Stato: </span>
+            <span v-if="utenza.b_status">
+                <svg class="bi bi-circle-fill text-success" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8" cy="8" r="8"/>
+                </svg>
+            </span>
+            <span v-else>
+                <svg class="bi bi-circle-fill text-danger" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8" cy="8" r="8"/>
+                </svg>
+            </span>
+        </div>
         <div class="container">
             <div class="row">
                 <h2> {{ utenza.name }} </h2>
