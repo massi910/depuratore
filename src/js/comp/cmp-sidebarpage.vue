@@ -53,11 +53,14 @@
             <div class="collapse navbar-collapse align-items-end" style="width:100%" id="navbarNavAltMarkup">
                 <div class="container bg-secondary justify-content-start p-1">
                     <a v-on:click="autoRefresh" class="ml-2">
-                        <font-awesome-icon id="autoRefresh" icon="sync" />
+                        <font-awesome-icon id="autoRefresh" icon="sync" style="color:black" />
                     </a>
                     <a v-on:click="refresh" class="ml-2">
-                        <font-awesome-icon id="refresh" icon="redo" />
-                    </a>            
+                        <font-awesome-icon id="refresh" icon="redo" style="color:black" />
+                    </a>
+                    <a href="../../tables/vue-tables.html" target="_blank" class="ml-2">
+                        <font-awesome-icon id="table" icon="table" style="color:black" />
+                    </a>
                 </div>
             </div>
 
@@ -91,8 +94,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSync } from '@fortawesome/free-solid-svg-icons'
 import { faRedo } from '@fortawesome/free-solid-svg-icons'
+import { faTable } from '@fortawesome/free-solid-svg-icons'
 library.add(faSync)
 library.add(faRedo)
+library.add(faTable)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /**
