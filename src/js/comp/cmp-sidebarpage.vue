@@ -1,8 +1,8 @@
 <template>
 <div class="container-fluid">
 <div class="row">
-    <div class="col-lg-2 p-0">
-        <nav id="sidebar" 
+    <div class="col-lg-2 p-0 bg-info">
+        <nav id="sidebar"
             class="navbar navbar-expand-lg navbar-dark bg-dark flex-column sticky-top p-0">
             
             <!-- navbar header -->
@@ -32,23 +32,25 @@
                                 v-bind:item="item"
                             ></slot>
                         </a>
-                        
                     </div>
                 </div>
             </div>
 
-            <!-- buttom section
-            <div class="collapse navbar-collapse mr-auto pt-2 align-items-start bg-info">
-                <div class="navbar-nav flex-column p-4">
-                        <h4></h4>
-                        <h4>info2</h4>
+            <!-- buttom section -->
+            <div class="collapse navbar-collapse p-2" style="width:100%" id="navbarNavAltMarkup">
+                <div class="container flex-column p-1 border border-white rounded">
+                    <div 
+                        v-for="index in maxWidget"
+                        :key="index"
+                        >
+                        <slot :name="index+'widget'"></slot>
+                    </div>
                 </div>
             </div>
-             -->
 
             <!-- controllers -->
-            <div class="container-fluid p-0">
-                <div class="collapse navbar-collapse bg-secondary" id="navbarNavAltMarkup">
+            <div class="collapse navbar-collapse align-items-end" style="width:100%" id="navbarNavAltMarkup">
+                <div class="container bg-secondary justify-content-start p-1">
                     <a v-on:click="autoRefresh" class="ml-2">
                         <font-awesome-icon id="autoRefresh" icon="sync" />
                     </a>
@@ -57,7 +59,8 @@
                     </a>            
                 </div>
             </div>
-        </nav>  
+
+        </nav>
     </div>
 
     <div class="col-lg-10">
@@ -112,6 +115,7 @@ export default
         return {
             refreshInterval: null,
             activeItem: Object,
+            maxWidget: 4
         }
     },
     props:
@@ -234,3 +238,18 @@ export default
     }
 };
 </script>
+
+<style>
+#sidebar
+{
+    min-height: 100vh;
+}
+
+@media (max-width: 992px)
+{ 
+    #sidebar
+    {
+        min-height: auto;
+    }
+}
+</style>

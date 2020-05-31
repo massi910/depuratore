@@ -52,21 +52,6 @@
     }
 }
 
-
-/* sidebar */
-#sidebar
-{
-    min-height: 100vh;
-}
-
-@media (max-width: 992px)
-{ 
-    #sidebar
-    {
-        min-height: auto;
-    }
-}
-
 .anchor-extended
 {
     display: block;

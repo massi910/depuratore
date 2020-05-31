@@ -58,7 +58,7 @@ var app = new Vue({
     {
         utenze:
         {
-            handler: function () {                
+            handler: function () {
                 this.sendItems();
             },
             deep: true
