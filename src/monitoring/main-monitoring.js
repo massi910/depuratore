@@ -62,65 +62,37 @@ var app = new Vue({
         water_level: [],
         extUpdate: false
     },
-    watch:
-    {
-        utenze_app:
-        {
-            handler: function () 
-            {
-                if (this.extUpdate) // external update case
-                    this.extUpdate = false
-                else
-                {
-                    this.sendItems();
-                    this.loadItems();
-                }
-            },
-            deep: true
-                
-        },
-        utenze_db:
-        {
-            handler: function()
-            {
-                if (this.utenze_app.length == 0)
-                {
-                    this.utenze_app = JSON.parse(JSON.stringify(this.utenze_db))
-                    this.extUpdate = true;
-                }
-
-                // check if the utenze just loaded are equal to the utenze in the app
-                let equal = this.utenzeEquals(this.utenze_db, this.utenze_app);
-                if (!equal)
-                {                    
-                    this.utenze_app = JSON.parse(JSON.stringify(this.utenze_db));
-                    this.extUpdate = true;
-                }
-            },
-            deep: true
-        }
-    },
     methods:
     {
         ////////////////////////////////////////
         ////////// data up/download ////////////
         ////////////////////////////////////////
         // Write item to db
-        sendItems: function ()
+        sendItems: async function ()
         {
             axios
                 .post("/php/update-mnt_items.php", this.utenze_app)
-                .then(response => console.log(response))
+                .then(response => this.loadItems())
                 .catch(error => console.log(error));
         },
         /**
          * Load utenze in utenze_db
          */
-        loadItems: function () 
+        loadItems: function ()
         {   
             axios
                 .get('/php/mnt_items.php')
-                .then(response => (this.utenze_db = response.data))
+                .then(response => 
+                    {
+                        this.utenze_db = response.data
+                        if (this.utenze_app.length == 0)
+                            this.utenze_app = JSON.parse(JSON.stringify(this.utenze_db))
+
+                        // check if the utenze just loaded are equal to the utenze in the app
+                        let equal = this.utenzeEquals(this.utenze_db, this.utenze_app);
+                        if (!equal)
+                            this.utenze_app = JSON.parse(JSON.stringify(this.utenze_db));
+                    })
                 .catch(error => console.log(error));
         },
         // load items section from db

@@ -12,7 +12,8 @@
             <!-- UTENZE -->
             <template v-slot:cntutenze="slotProps">
                 <utenze v-bind:utenze="utenze_app" v-bind:utenze_db="utenze_db" :sezioni="sections" 
-                v-on:alarm="slotProps.setActiveItemForName('Allarmi')"></utenze>
+                v-on:alarm="slotProps.setActiveItemForName('Allarmi')"
+                v-on:write="sendItems"></utenze>
             </template>
 
             <!-- ALLARMI -->

@@ -5,7 +5,7 @@
             <button 
                 v-for="sezione in sezioni"
                 :key="sezione.id" 
-                @click="setSezioneCorrente(sezione.id)" 
+                @click="setSezioneCorrente(sezione.id)"
                 class="btn btn-default"
                 :class="{ active : sezioneCorrente ==  sezione.id }">
                 {{sezione.name}}
