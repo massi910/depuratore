@@ -72,13 +72,13 @@ var app = new Vue({
         {
             axios
                 .post("/php/update-mnt_items.php", this.utenze_app)
-                .then(response => this.loadItems())
+                .then(() => this.loadItems())
                 .catch(error => console.log(error));
         },
         /**
          * Load utenze in utenze_db
          */
-        loadItems: function ()
+        loadItems: async function ()
         {   
             axios
                 .get('/php/mnt_items.php')
