@@ -11,7 +11,11 @@
                 {{sezione.name}}
             </button>
         </div>
-        <utenza v-on="$listeners" v-for="utenza in utenzeAttive" v-bind:utenza="utenza" v-bind:key="utenza.id"></utenza>
+        <utenza v-on="$listeners" 
+            v-for="(utenza, index) in utenzeAttive" 
+            v-bind:utenza="utenza"
+            v-bind:utenza_db="utenze_dbAttive[index]"
+            v-bind:key="utenza.id"></utenza>
     </div>
 </template>
 
@@ -27,7 +31,8 @@ export default {
     props: 
     {
         utenze: Array,
-        sezioni: Array
+        utenze_db: Array,
+        sezioni: Array,
     },
     data: function() {
         return {
@@ -37,7 +42,19 @@ export default {
     computed: {
         utenzeAttive: function() {
             var alias = this;
+            if (this.utenze == null)
+                console.log("null");
+                
             return this.utenze.filter(function(utenza) 
+            {                 
+                if (alias.sezioneCorrente == undefined) // show all when starting
+                    return true;
+                    
+                return utenza.section_id == alias.sezioneCorrente 
+            })},
+        utenze_dbAttive: function() {
+            var alias = this;
+            return this.utenze_db.filter(function(utenza) 
             {                 
                 if (alias.sezioneCorrente == undefined) // show all when starting
                     return true;
@@ -51,5 +68,9 @@ export default {
             this.sezioneCorrente = sezione
         }
     },
+    mounted()
+    {
+
+    }
 }
 </script>

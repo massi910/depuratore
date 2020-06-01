@@ -7,11 +7,11 @@
 </head>
 <body>
     <div id="app">
-        <sidebarpage :menu="menu" :activeMenu="menu[0]" v-on:refresh="reloadData">
+        <sidebarpage :menu="menu" :activeMenu="menu[0]" v-on:refresh="loadData">
             
             <!-- UTENZE -->
             <template v-slot:cntutenze="slotProps">
-                <utenze v-bind:utenze="utenze" :sezioni="sections" 
+                <utenze v-bind:utenze="utenze_app" v-bind:utenze_db="utenze_db" :sezioni="sections" 
                 v-on:alarm="slotProps.setActiveItemForName('Allarmi')"></utenze>
             </template>
 
@@ -22,7 +22,7 @@
                 > {{ slotProps.item.counter }} </span>
             </template>
             <template v-slot:cntallarmi="slotProps">
-                <cntalarms :utenze="utenze" :item="slotProps.item"></cntalarms>
+                <cntalarms :utenze="utenze_app" :item="slotProps.item"></cntalarms>
             </template>
 
             <!-- FASI -->
@@ -35,11 +35,11 @@
             <template v-slot:cntgrafici>
                 <cnttabs :regions="regions" :name="'Grafici'">
                     <template v-slot:reg1>
-                        <consumptions :utenze="utenze" :units="units" :consumptions="consumptions">
+                        <consumptions :utenze="utenze_app" :units="units" :consumptions="consumptions">
                         </consumptions>
                     </template>
                     <template v-slot:reg2>
-                        <consumptions-items :utenze="utenze" :sezioni="sections" :units="units" 
+                        <consumptions-items :utenze="utenze_app" :sezioni="sections" :units="units" 
                             :consumptions="consumptions"></consumptions-items>
                     </template>
                     <template v-slot:reg3>
@@ -53,7 +53,7 @@
 
             <!-- widgets -->
             <template v-slot:1widget>
-                <active-items :utenze="utenze"></active-items>
+                <active-items :utenze="utenze_app"></active-items>
             </template>
             <template v-slot:2widget>
                 <h5>ultima lettura elettricità</h5>

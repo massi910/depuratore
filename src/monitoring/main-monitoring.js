@@ -48,23 +48,53 @@ var app = new Vue({
             {id: 'reg3', name: 'Consumo acqua'},
             {id: 'reg4', name: 'Livello acqua'}
         ],
-        utenze: [],
+        utenze_app: [],
+        utenze_db: [],
         sections: [],
         units: [],
         consumptions: [],
         phases: [],
         water_cons: [],
         water_level: [],
+        extUpdate: false
     },
     watch:
     {
-        utenze:
+        utenze_app:
         {
-            handler: function () {
-                this.sendItems();
+            handler: function () 
+            {
+                if (this.extUpdate) // external update case
+                    this.extUpdate = false
+                else
+                {
+                    this.sendItems();
+                    this.loadItems();
+                }
             },
             deep: true
+                
         },
+        utenze_db:
+        {
+            handler: function()
+            {
+                if (this.utenze_app.length == 0)
+                {
+                    this.utenze_app = JSON.parse(JSON.stringify(this.utenze_db))
+                    this.extUpdate = true;
+                }
+
+                // check if the utenze just loaded are equal to the utenze in the app
+                let equal = this.utenzeEquals(this.utenze_db, this.utenze_app);
+                if (!equal)
+                {                    
+                    this.utenze_app = JSON.parse(JSON.stringify(this.utenze_db));
+                    this.extUpdate = true;
+                }
+            },
+            deep: true
+        }
     },
     methods:
     {
@@ -75,16 +105,18 @@ var app = new Vue({
         sendItems: function ()
         {
             axios
-                .post("/php/update-mnt_items.php", this.utenze)
+                .post("/php/update-mnt_items.php", this.utenze_app)
                 .then(response => console.log(response))
                 .catch(error => console.log(error));
         },
-        // Load items from db
+        /**
+         * Load utenze in utenze_db
+         */
         loadItems: function () 
-        {
+        {   
             axios
                 .get('/php/mnt_items.php')
-                .then(response => (this.utenze = response.data))
+                .then(response => (this.utenze_db = response.data))
                 .catch(error => console.log(error));
         },
         // load items section from db
@@ -106,16 +138,39 @@ var app = new Vue({
         /**
          * Reload data from db
          */
-        reloadData: function () 
-        {
+        loadData: function () 
+        {            
             this.loadItems();
             this.loadSections();
             this.loadPhases();
         },
+        /**
+         * Return true if the given
+         * arrays are equals.
+         * 
+         * @param {Array} ut_db utenze_db
+         * @param {Array} ut_app utenze_app
+         */
+        utenzeEquals: function (ut_db, ut_app) 
+        {
+            for (let i = 0; i < ut_db.length; i++)
+            {
+                let el_db = ut_db[i]
+                let el_app = ut_app[i]
+                let props_db = Object.keys(el_db)
+                let props_app = Object.keys(el_app)
+                for (let iProp = 0; iProp < props_db.length; iProp++)
+                {   
+                    if (el_db[props_db[iProp]] != el_app[props_app[iProp]])
+                        return false;
+                }
+            }
+            return true;
+        }
     },
     created: async function() 
     {
-        this.reloadData();
+        this.loadData()
         
         axios
             .get('/php/units.php')

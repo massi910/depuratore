@@ -51,7 +51,7 @@
 
             <!-- controllers -->
             <div class="collapse navbar-collapse align-items-end" style="width:100%" id="navbarNavAltMarkup">
-                <div class="container bg-secondary justify-content-start p-1">
+                <div class="container bg-secondary justify-content-start p-1 rounded">
                     <a v-on:click="autoRefresh" class="ml-2">
                         <font-awesome-icon id="autoRefresh" icon="sync" style="color:black" />
                     </a>
