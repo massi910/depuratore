@@ -53,13 +53,13 @@
 
             <!-- widgets -->
             <template v-slot:1widget>
-                <active-items :utenze="utenze"></active-items>
+                <widget-active-items :utenze="utenze"></widget-active-items>
             </template>
             <template v-slot:2widget>
-                <h5>ultima lettura elettricità</h5>
+                <widget-cons :consumptions="consumptions"></widget-cons>
             </template>
             <template v-slot:3widget>
-                <h5>ultima lettura acqua</h5>
+                <widget-water :water_cons="water_cons"></widget-water>
             </template>
             <template v-slot:4widget>
                 <h5>progress bar fasi</h5>
