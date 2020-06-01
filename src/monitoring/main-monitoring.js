@@ -47,8 +47,8 @@ var app = new Vue({
             { name: "Grafici" },
         ],
         regions: [ 
-            {id: 'reg1', name: 'Consumo elettrico'},
-            {id: 'reg2', name: 'Consumo elettrico / utenza'},
+            {id: 'reg1', name: 'Consumo elettrico generale'},
+            {id: 'reg2', name: 'Consumo elettrico per utenza'},
             {id: 'reg3', name: 'Consumo acqua'},
             {id: 'reg4', name: 'Livello acqua'}
         ],
@@ -87,7 +87,7 @@ var app = new Vue({
                         this.utenze_db = response.data
                         if (this.utenze_app.length == 0)
                             this.utenze_app = JSON.parse(JSON.stringify(this.utenze_db))
-
+                
                         // check if the utenze just loaded are equal to the utenze in the app
                         let equal = this.utenzeEquals(this.utenze_db, this.utenze_app);
                         if (!equal)
@@ -146,6 +146,10 @@ var app = new Vue({
     },
     created: async function() 
     {
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+          })
+
         this.loadData()
         
         axios

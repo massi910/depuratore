@@ -51,13 +51,14 @@
             <!-- controllers -->
             <div class="collapse navbar-collapse align-items-end" style="width:100%" id="navbarNavAltMarkup">
                 <div class="container bg-secondary justify-content-start p-1 rounded">
-                    <a v-on:click="autoRefresh" class="ml-2">
+                    <a v-on:click="autoRefresh" class="ml-2" data-toggle="tooltip" title="Auto refresh">
                         <font-awesome-icon id="autoRefresh" icon="sync" style="color:black" />
                     </a>
-                    <a v-on:click="refresh" class="ml-2">
+                    <a v-on:click="refresh" class="ml-2" data-toggle="tooltip" title="Single refresh">
                         <font-awesome-icon id="refresh" icon="redo" style="color:black" />
                     </a>
-                    <a href="../../tables/vue-tables.html" target="_blank" class="ml-2">
+                    <a href="../../tables/vue-tables.html" target="_blank" class="ml-2"
+                        data-toggle="tooltip" title="Goto tables">
                         <font-awesome-icon id="table" icon="table" style="color:black" />
                     </a>
                 </div>

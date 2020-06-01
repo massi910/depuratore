@@ -1,6 +1,6 @@
 <template>
     <div class="card-deck p-3 align-items-center">
-        <cardalarm 
+        <cardalarm v-on="$listeners"
             v-for="utenza in utenze"
             :key="utenza.id"
             v-bind:utenza="utenza"

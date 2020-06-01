@@ -23,13 +23,14 @@
                 > {{ slotProps.item.counter }} </span>
             </template>
             <template v-slot:cntallarmi="slotProps">
-                <cntalarms :utenze="utenze_app" :item="slotProps.item"></cntalarms>
+                <cntalarms :utenze="utenze_app" :item="slotProps.item" v-on:write="sendItems"></cntalarms>
             </template>
 
             <!-- FASI -->
             <template v-slot:cntfasi="slotProps">
                 <cntphases 
-                    :phases="phases" :item="slotProps.item" :is-active="slotProps.isActive"></cntphases>
+                    :phases="phases" :item="slotProps.item" 
+                    :utenze_db="utenze_db" :is-active="slotProps.isActive"></cntphases>
             </template>
 
             <!-- GRAFICI -->

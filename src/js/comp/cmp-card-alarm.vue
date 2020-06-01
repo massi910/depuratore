@@ -54,6 +54,7 @@ export default {
         deActiveAlarm: function(event)
         {
             this.utenza.b_alarm = false;
+            this.$emit('write');
         }
     }
 }

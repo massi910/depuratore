@@ -10,13 +10,7 @@
                 <div class="container">
                     <div>
                         <h2 class=""> 
-                        {{ props.carditem.name }}
-                        <a
-                            on:click="">
-                            <font-awesome-icon id="table" icon="info-circle" 
-                            style="color:black; font-size: 0.5em;"
-                            size="xs" />
-                        </a>
+                            {{ props.carditem.name }}
                         </h2>
                     </div>
                 </div>
@@ -25,6 +19,27 @@
             <template v-slot:body="props">
                 <div class="container">
                     {{ props.carditem.description }}
+                    <div class="mt-2">
+                        <a class="btn btn-default btn-sm ml-0" data-toggle="collapse" 
+                        :href="'#collapseExample'+buildPhaseId(phase.id)"
+                            role="button" aria-expanded="false" :aria-controls="'collapseExample'+buildPhaseId(phase.id)">
+                            Utenze coinvolte
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="collapse" :id="'collapseExample'+buildPhaseId(phase.id)">
+                    <div class="container mt-2">
+                        <div class="border p-2">
+                            <ul class="pl-3 pt-0 pb-0">
+                                <li
+                                    v-for="item in getInvolvedItems(props.carditem.id)"
+                                    :key="item.id">
+                                    {{ item.name }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </template>
 
@@ -40,14 +55,15 @@
 
 <script>
 import generalcard from './cmp-general-card'
-import $ from 'jquery'
 import Vue from 'vue'
+import $ from 'jquery'
+import 'mdbootstrap/css/mdb.min.css'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-import { faInfo } from '@fortawesome/free-solid-svg-icons'
-library.add(faInfoCircle)
-library.add(faInfo)
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+library.add(faAngleDown)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /**
@@ -74,7 +90,8 @@ export default {
         // container item menu
         item: Object,
         // if true, this component is currently showing
-        isActive: Boolean
+        isActive: Boolean,
+        utenze_db: Array
     },
     watch:
     {
@@ -156,6 +173,13 @@ export default {
                     return this.phases[i];
             
             return this.phases[0];
+        },
+        getInvolvedItems(phaseId)
+        {
+            return this.utenze_db.filter((item) =>
+            {
+                return item.phase == phaseId;
+            })
         }
     },
     mounted()
@@ -166,6 +190,15 @@ export default {
             instance.updateScrollPosition()
             }, 2000);
         
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+          })
     }
 }
 </script>
+
+<style>
+    .mask {
+        pointer-events:none;        
+    }
+</style>
