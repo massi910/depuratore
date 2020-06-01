@@ -7,14 +7,25 @@
             :id="buildPhaseId(phase.id)"
             >
             <template v-slot:title="props">
-                <div>
-                    <h2> {{ props.carditem.name }} </h2>
+                <div class="container">
+                    <div>
+                        <h2 class=""> 
+                        {{ props.carditem.name }}
+                        <a
+                            on:click="">
+                            <font-awesome-icon id="table" icon="info-circle" 
+                            style="color:black; font-size: 0.5em;"
+                            size="xs" />
+                        </a>
+                        </h2>
+                    </div>
                 </div>
-                
             </template>
 
             <template v-slot:body="props">
-                {{ props.carditem.description }}
+                <div class="container">
+                    {{ props.carditem.description }}
+                </div>
             </template>
 
             <template v-slot:mask="props">
@@ -30,6 +41,14 @@
 <script>
 import generalcard from './cmp-general-card'
 import $ from 'jquery'
+import Vue from 'vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { faInfo } from '@fortawesome/free-solid-svg-icons'
+library.add(faInfoCircle)
+library.add(faInfo)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /**
  * Container for depuration phases
