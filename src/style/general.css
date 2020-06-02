@@ -14,6 +14,11 @@
     font-size: 3rem;
     font-family: Impact, Charcoal, sans-serif;
     color: black;
+
+}
+.logo:hover
+{
+    color: #343a40;
 }
 .top-header-info
 {
