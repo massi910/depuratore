@@ -32,7 +32,8 @@ export default {
     },
     computed: {
         dates: function() {
-            return this.consumptions.map(e => e.date)
+            const d = new Set(this.consumptions.map(e => e.date))
+            return [...d]
         },
         consumptionsData: function() {
             var data = {
@@ -46,7 +47,8 @@ export default {
                     borderColor: this.colorArray[utenza.id],
                     label: utenza.name,
                     // TO-DO: 0 = valore per testare il funzionamento -> sarà null
-                    data: this.consumptions.map(e => this.dates.includes(e.date) && e.id_item == utenza.id ? e.cons : 0 )
+                    // data: this.consumptions.map(e => this.dates.includes(e.date) && e.id_item == utenza.id ? e.cons : 0 )
+                    data: this.consumptions.filter(e => e.id_item == utenza.id).map(e => e.cons)
                 })
             }
             return data

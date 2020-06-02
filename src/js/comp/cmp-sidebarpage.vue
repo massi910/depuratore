@@ -42,6 +42,7 @@
                     <div 
                         v-for="index in maxWidget"
                         :key="index"
+                        class="w-100 text-right"
                         >
                         <slot :name="index+'widget'"></slot>
                     </div>
