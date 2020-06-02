@@ -26,18 +26,20 @@ export default {
         beforeLast: function() {
             const value = this.consumptions
                 .filter(entry => entry.date == this.lastTwoDays[0])
-                .reduce((acc, value) => acc + value.cons,
-                    0)
+                .map(entry => parseInt(entry.cons, 10))
+                .reduce((acc, value) => acc + value,
+                    0) // initial value
 
-            return value != null ? parseInt(value, 10) : 'N/A'
+            return value != null ? value : 'N/A'
         },
         last: function() {
             const value = this.consumptions
                 .filter(entry => entry.date == this.lastTwoDays[1])
-                .reduce((acc, value) => acc + value.cons,
-                    0)
+                .map(entry => parseInt(entry.cons, 10))
+                .reduce((acc, value) => acc + value,
+                    0) // initial value
 
-            return value != null ? parseInt(value, 10) : 'N/A'
+            return value != null ? value : 'N/A'
         },
         compared: function() {
             return this.last - this.beforeLast

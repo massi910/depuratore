@@ -22,7 +22,7 @@
         }
         else
         {
-            header('location: /monitoring/monitoring.html');
+            header('location: ../__/monitoring/monitoring.html');
         }
     }
 ?>
