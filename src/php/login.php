@@ -18,11 +18,15 @@
         $result = mysqli_query($conn, $query);
         if(!($line = mysqli_fetch_array($result)))
         {
-            echo '<script>alert("Wrong password")</script>';
+            echo '
+            <script>
+                alert("Password errata. Riprova")
+                window.location="../__/login/login.html"
+            </script>';
         }
         else
         {
-            header('location: ../__/monitoring/monitoring.html');
+            header('Location: ../__/monitoring/monitoring.html');
         }
     }
 ?>
