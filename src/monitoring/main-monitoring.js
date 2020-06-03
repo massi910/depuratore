@@ -14,6 +14,7 @@ import waterLevel from '../js/comp/water-level'
 import widgetActiveItems from '../js/comp/cmp-widget-active-items'
 import widgetCons from '../js/comp/cmp-widget-cons'
 import widgetWater from '../js/comp/cmp-widget-water'
+import widgetCurrentPhase from '../js/comp/cmp-widget-current-phase'
 import axios from 'axios'
 import Vue from 'vue'
 import $ from 'jquery'
@@ -34,7 +35,8 @@ var app = new Vue({
         waterLevel,
         widgetActiveItems,
         widgetCons,
-        widgetWater
+        widgetWater,
+        widgetCurrentPhase
     },
     el: '#app',
     data:

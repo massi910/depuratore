@@ -1,20 +1,23 @@
-<template>
-    <div class="container-fluid border mt-4 p-2">
-        
-        <div class="card mb-2">
-            <div class="card-header">Water Consumption</div>
-            <barchart style="height: 80vh" :chart-data="wcd"></barchart>
-        </div>
+<template>       
+    <div class="card mt-3">
+        <div class="card-header">
+            <h4 class="m-1">Livello dell'acqua nella vasca</h4>
+            
+            <!-- interval selection -->
+            <div class="btn-group float-right" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-outline-default btn-sm dropdown-toggle" 
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Seleziona intervallo
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" v-on:click="changeData(365)">Tutti</a>
+                    <a class="dropdown-item" v-on:click="changeData(31)">Ultimo mese</a>
+                    <a class="dropdown-item" v-on:click="changeData(7)">Ultima settimana</a>
+                </div>
+            </div>
 
-        <div>
-            <button class="btn btn-outline-default btn-sm" v-on:click="changeData(() => true)">
-                Tutti
-            </button>
-            <button class="btn btn-outline-default btn-sm" v-on:click="changeData(lastSevenFilter)">
-                Ultimi sette giorni
-            </button>
         </div>
-
+        <barchart style="height: 80vh" :chart-data="wcd"></barchart>
     </div>
 </template>
 
@@ -25,15 +28,7 @@ export default {
     data: function() {
         return {
             /** Chart data */
-            wcd: {},
-            /** Date filter function */
-            lastSevenFilter: (date) => 
-            {
-                let today = new Date();
-                let diff = today.getTime() - new Date(date).getTime();
-                let diffDays = diff / (1000 * 3600 * 24);
-                return diffDays < 28;
-            }
+            wcd: {}
         }
     },
     components:
@@ -73,15 +68,22 @@ export default {
          * In order to change the chart rendering, the 
          * entire object should be assign
          */
-        changeData: function(filter)
+        changeData: function(daysNumber)
         {
             this.wcd = {
-                labels: this.water_cons.map(e => e.date).filter(filter),
+                labels: this.water_cons.map(e => e.date).filter((date) => 
+                    {
+                        let today = new Date();
+                        let diff = today.getTime() - new Date(date).getTime();
+                        let diffDays = diff / (1000 * 3600 * 24);
+                        return diffDays < daysNumber;
+                    }),
                 datasets: [{
                     label: 'lt',
-                    backgroundColor: '#3232ff',
+                    backgroundColor: '#f87979',
                     data: this.water_cons.map(e => e.cons)
-                }]}
+                }]
+            }
         }
     }
 }
