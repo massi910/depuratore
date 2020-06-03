@@ -7,7 +7,10 @@
 </head>
 <body>
     <div id="app">
-        <sidebarpage :menu="menu" :activeMenu="menu[0]" v-on:refresh="loadData">
+        <spinner :show="!loaded"></spinner>
+        <sidebarpage
+            v-if="loaded"
+            :menu="menu" :activeMenu="menu[0]" v-on:refresh="loadData">
             
             <!-- UTENZE -->
             <template v-slot:cntutenze="slotProps">
@@ -52,7 +55,6 @@
                     </template>
                 </cnttabs>
             </template>
-
             <!-- widgets -->
             <template v-slot:1widget>
                 <widget-active-items :utenze="utenze_app"></widget-active-items>

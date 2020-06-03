@@ -139,7 +139,7 @@ export default
                 localStorage.activeItem = this.activeItem.name;
                 this.setScrollPosition(this.activeItem);
             },
-            deep: true
+            deep: true,
         },
     },
     methods:

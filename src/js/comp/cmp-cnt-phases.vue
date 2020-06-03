@@ -102,6 +102,7 @@ export default {
                 this.activePhase = this.getFirstActive();
             },
             deep: true,
+            immediate: true
         },
         activePhase:
         {
@@ -197,8 +198,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .mask {
-        pointer-events:none;        
+        pointer-events:none;
     }
 </style>

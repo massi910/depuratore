@@ -1,5 +1,5 @@
 <template>
-    <div class="container mb-3">
+    <div class="container-fluid mb-3">
         
         <!-- nav tabs -->
         <ul :id="name + '_id'" class="nav nav-tabs mt-2">

@@ -15,15 +15,15 @@ import widgetActiveItems from '../js/comp/cmp-widget-active-items'
 import widgetCons from '../js/comp/cmp-widget-cons'
 import widgetWater from '../js/comp/cmp-widget-water'
 import widgetCurrentPhase from '../js/comp/cmp-widget-current-phase'
+import spinner from '../js/comp/spinner'
 import axios from 'axios'
 import Vue from 'vue'
 import $ from 'jquery'
 
-
-
 var app = new Vue({
     components:
     {
+        spinner,
         sidebarpage,
         cntalarms,
         utenze,
@@ -62,7 +62,8 @@ var app = new Vue({
         phases: [],
         water_cons: [],
         water_level: [],
-        extUpdate: false
+        extUpdate: false,
+        loaded: false
     },
     methods:
     {
@@ -82,7 +83,7 @@ var app = new Vue({
          */
         loadItems: async function ()
         {   
-            axios
+            return axios
                 .get('/php/mnt_items.php')
                 .then(response => 
                     {
@@ -100,7 +101,7 @@ var app = new Vue({
         // load items section from db
         loadSections: function () 
         {
-            axios
+            return axios
                 .get('/php/mnt_sections.php')
                 .then(response => (this.sections = response.data))
                 .catch(error => console.log(error))
@@ -108,7 +109,7 @@ var app = new Vue({
         // load depuration phases from db
         loadPhases: function ()
         {
-            axios
+            return axios
                 .get('/php/load-phases.php')
                 .then(response => (this.phases = response.data))
                 .catch(error => console.log(error))
@@ -144,31 +145,66 @@ var app = new Vue({
                 }
             }
             return true;
+        },
+
+        loadUnits()
+        {
+            return axios
+                .get('/php/units.php')
+                .then(response => this.units = response.data)
+                .catch(error => console.log(error))
+        },
+
+        loadConsumptions()
+        {
+            return axios
+                .get('/php/consumptions.php')
+                .then(response => this.consumptions = response.data)
+                .catch(error => console.log(error))
+        },
+
+        loadCons()
+        {
+            return axios
+                .get('/php/water_cons.php')
+                .then(response => this.water_cons = response.data)
+                .catch(error => console.log(error))
+        },
+        loadWaterLevel()
+        {
+            return axios
+                .get('/php/water_level.php')
+                .then(response => this.water_level = response.data)
+                .catch(error => console.log(error))
+        },
+
+        // starting init
+        fetchItems()
+        {
+            let alias = this;
+            axios.all([
+                this.loadItems(),
+                this.loadSections(),
+                this.loadPhases(),
+                this.loadCons(),
+                this.loadConsumptions(),
+                this.loadUnits(),
+                this.loadWaterLevel()
+            ])
+            .then(axios.spread(function (acct, perms)
+            {
+                alias.loaded = true
+            }));
         }
     },
-    created: async function() 
+    created: async function()
     {
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
           })
 
-        this.loadData()
+        this.fetchItems()
         
-        axios
-            .get('/php/units.php')
-            .then(response => this.units = response.data)
-            .catch(error => console.log(error))
-
-        axios.get('/php/consumptions.php')
-            .then(response => this.consumptions = response.data)
-            .catch(error => console.log(error))
-
-        axios.get('/php/water_cons.php')
-            .then(response => this.water_cons = response.data)
-            .catch(error => console.log(error))
-
-        axios.get('/php/water_level.php')
-            .then(response => this.water_level = response.data)
-            .catch(error => console.log(error))
+        
     }
 })

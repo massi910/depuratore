@@ -38,27 +38,6 @@ export default {
         units: Array,
         water_level: Array,
     },
-    watch:
-    {
-        water_level:
-        {
-            /** each time water_cons changes the chart 
-             * data formatted object will be updated 
-            */
-            handler: function()
-            {
-                this.wld = {
-                labels: this.water_level.map(e => e.date),
-                datasets: [{
-                    label: 'lt',
-                    backgroundColor: '#f87979',
-                    data: this.water_level.map(e => e.cons)
-                }]}
-            },
-            deep: true,
-            immediate: true
-        }
-    },
     methods:
     {
         /**
@@ -84,6 +63,10 @@ export default {
                 }]
             }
         }
+    },
+    mounted()
+    {
+        this.changeData(7);
     }
 }
 </script>
