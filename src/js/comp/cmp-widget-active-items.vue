@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h5 class="text-white">Utenze attive <span class="badge badge-default text-dark w-110">{{ active +'/'+ all }}</span></h5>
+        <h6 class="text-white">Utenze attive 
+            <span class="badge badge-default text-dark w-110">{{ active +'/'+ all }}</span>
+        </h6>
     </div>
 </template>
 

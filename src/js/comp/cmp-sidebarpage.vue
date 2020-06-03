@@ -7,7 +7,9 @@
             
             <!-- navbar header -->
             <div class="container-fluid bg-secondary p-3">
-                <a class="navbar-brand mx-auto" href="../../home/home.html">Depuratore MD1</a>
+                <a class="navbar-brand mx-auto" href="../../home/home.html">
+                    <h5>Depuratore MD1</h5>
+                </a>
             </div>
             
             <!-- collapse for smaller screens -->
@@ -42,7 +44,7 @@
                     <div 
                         v-for="index in maxWidget"
                         :key="index"
-                        class="w-100 text-right border rounded p-1"
+                        class="w-100 text-right bg-secondary rounded p-1 mb-1"
                         >
                         <slot :name="index+'widget'"></slot>
                     </div>

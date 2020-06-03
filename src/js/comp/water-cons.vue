@@ -1,7 +1,7 @@
 <template>       
     <div class="card mt-3">
         <div class="card-header">
-            <h4 class="m-1">Livello dell'acqua nella vasca</h4>
+            <h4 class="m-1">Consumo di acqua</h4>
             
             <!-- interval selection -->
             <div class="btn-group float-right" role="group">

@@ -1,7 +1,7 @@
 <template>
     <div v-if="consumptionsData != null" class="card mt-3">
         <div class="card-header">
-            <h4 class="m-1">Consumi totali</h4>
+            <h4 class="m-1">Consumi elettrici generali</h4>
             
             <!-- interval selection -->
             <div class="btn-group float-right" role="group">
