@@ -1,18 +1,26 @@
 <?php
     include 'config.php';
 
-    $utenze = array(2,3,4,5,6,7,8,9,10,11,12,13);
-    $date = array("2020-05-02","2020-05-03","2020-05-04","2020-05-05","2020-05-06","2020-05-07","2020-05-08");
-    
+    // (id_item, id_unit, cons, date)
+    $utenze = array(1);
+    // $utenze = array(2,3,4,5,6,7,8,9,10,11,12,13);
+    $date = array(
+        "2020-04-22", "2020-04-23", "2020-04-24", "2020-04-25", "2020-04-26", "2020-04-27", "2020-04-28","2020-04-29", "2020-04-30",
+        "2020-05-01", "2020-05-02", "2020-05-03", "2020-05-04", "2020-05-05", "2020-05-06", "2020-05-07", "2020-05-08", "2020-05-09",
+        "2020-05-10", "2020-05-11", "2020-05-12", "2020-05-13", "2020-05-14", "2020-05-15", "2020-05-16", "2020-05-17", "2020-05-18", "2020-05-19",
+        "2020-05-20", "2020-05-21", "2020-05-22", "2020-05-23", "2020-05-24", "2020-05-25", "2020-05-26", "2020-05-27", "2020-05-28", "2020-05-29",
+        "2020-05-30", "2020-05-31",
+        "2020-06-01", "2020-06-02", "2020-06-03");
+
     foreach ($utenze as $utenza) {
-        foreach ($date as $data) {
-            $cons = rand(0,100);
-            $query = "INSERT INTO consumptions (id_item, id_unit, cons, date) VALUES ($utenza, 1, $cons, '$data')";
-            if(mysqli_query($conn, $query)){
-                echo "Records added successfully.";
-            } else{
-                echo "ERROR: Could not able to execute $query. " . mysqli_error($conn);
+            foreach ($date as $data) {
+                $cons = rand(80,100);
+                $query = "INSERT INTO consumptions (id_item, id_unit, cons, date) VALUES ($utenza, 1, $cons, '$data')";
+                if(mysqli_query($conn, $query)){
+                    echo "Records added successfully.";
+                } else{
+                    echo "ERROR: Could not able to execute $query. " . mysqli_error($conn);
+                }
             }
-        }
     }
 ?>

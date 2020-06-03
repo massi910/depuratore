@@ -1,5 +1,6 @@
 <template>
     <div v-if="chartsData != null">
+        <!-- filtering toolbar -->
         <div class="btn-group btn-toolbar btn-group-toggle mb-3 pt-2 sticky-top">
             <button class="btn btn-default" :class="{ active : sezioneCorrente == undefined }" @click="sezioneCorrente = undefined">TUTTE</button>
             <button
@@ -11,6 +12,7 @@
                 {{sezione.name}}
             </button>
         </div>
+        <!-- graphs cards -->
         <div class="card mb-3" 
             v-for="utenza in utenzeAttive" :key="utenza.name">
             
@@ -30,6 +32,7 @@
                     </div>
                 </div>
             </div>
+            <!-- graph -->
             <barchart style="height: 45vh;" :chart-data="chartsData[utenza.id]"></barchart>
 
         </div>
@@ -62,6 +65,9 @@ export default {
     },
     computed: 
     {
+        /**
+         * active items filtered by current section (sezioneCorrente)
+         */
         utenzeAttive: function() {
             var alias = this;
             return this.utenze.filter(function(utenza) 
@@ -72,6 +78,9 @@ export default {
                 return utenza.section_id == alias.sezioneCorrente 
             })
         },
+        /**
+         * Set of all dates inside consumptions
+         */
         dates: function() {
             const d = new Set(this.consumptions.map(e => e.date))
             return [...d]
@@ -79,6 +88,9 @@ export default {
     },
     methods: 
     {
+        /**
+         * set current section (filters graphs by section)
+         */
         setSezioneCorrente: function(sezione) {            
             this.sezioneCorrente = sezione
         },

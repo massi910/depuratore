@@ -18,17 +18,29 @@ export default {
         water_cons: Array
     },
     computed: {
+        /**
+         * last two dates for which there's an entry in consumptions
+         */
         lastTwoDays: function() {
             return this.water_cons.map( entry => entry.date ).sort().slice(-2)
         },
+        /**
+         * sum of values in consumptions taken day before last
+         */
         beforeLast: function() {
             const value = this.water_cons.find(entry => entry.date == this.lastTwoDays[0])
             return value != null ? parseInt(value.cons, 10) : 'N/A'
         },
+        /**
+         * sum of values in consumptions taken last day
+         */
         last: function() {
             const value = this.water_cons.find(entry => entry.date == this.lastTwoDays[1])
             return value != null ? parseInt(value.cons, 10) : 'N/A'
         },
+        /**
+         * compares @last and @beforeLast values
+         */
         compared: function() {
             return this.last - this.beforeLast
         }

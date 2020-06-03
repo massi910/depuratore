@@ -12,9 +12,15 @@ export default {
         utenze: Array
     },
     computed: {
+        /**
+         * returns number of corrently active items
+         */
         active: function() {
             return this.utenze.filter(utenza => utenza.b_status).length
         },
+        /**
+         * return number of all items (active and inactive)
+         */
         all: function() {
             return this.utenze.length
         }
