@@ -13,12 +13,19 @@ export default {
         phases: Array
     },
     computed: {
+        /**
+         * current active phase
+         */
         currentPhase: function() {
             return this.phases
                 .filter(phase => phase.active)
                 .map(phase => phase.id)
                 .slice(-1)
         },
+        /**
+         * calculates the level the progress bar will show (width 0-100 %).
+         * Based on current phase
+         */
         width: function() {
             return (this.currentPhase / this.phases.length) * 100
         }

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- filtering toolbar -->
         <div class="btn-group btn-toolbar btn-group-toggle pt-3 sticky-top">
             <button class="btn btn-default" :class="{ active : sezioneCorrente ==  undefined }" @click="sezioneCorrente = undefined">TUTTE</button>
             <button 
@@ -11,6 +12,7 @@
                 {{sezione.name}}
             </button>
         </div>
+        <!-- cards utenze -->
         <utenza v-on="$listeners" 
             v-for="(utenza, index) in utenzeAttive" 
             v-bind:utenza="utenza"
@@ -40,6 +42,9 @@ export default {
         }
     },
     computed: {
+        /**
+         * active items filtered by current section (sezioneCorrente)
+         */
         utenzeAttive: function() {
             var alias = this;
             if (this.utenze == null)
@@ -64,6 +69,7 @@ export default {
     },
     methods: 
     {
+        // set current section (filters items by section)
         setSezioneCorrente: function(sezione) {            
             this.sezioneCorrente = sezione
         }

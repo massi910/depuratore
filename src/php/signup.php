@@ -16,11 +16,8 @@
     {
         $query = sprintf("INSERT INTO users (email, password) VALUES ('%s', '%s')", mysqli_real_escape_string($conn, $email), mysqli_real_escape_string($conn, $password));
         if(mysqli_query($conn, $query)){
-            echo "
-            <script>
-                alert('Registrazione effettuata. Verrai reindirizzato alla pagina di monitoraggio.')
-                window.location='../__/monitoring/monitoring.html'
-            </script>";
+            header('Location: ../__/login/login.html');
+            exit();
         } else{
             echo "ERROR: Could not able to execute $query. " . mysqli_error($conn);
         }

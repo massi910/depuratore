@@ -18,11 +18,17 @@ export default {
         consumptions: Array
     },
     computed: {
+        /**
+         * last two dates for which there's an entry in consumptions
+         */
         lastTwoDays: function() {
             const setOfDates = new Set(this.consumptions.map(entry => entry.date))
             const uniqueDates = [...setOfDates].sort()
             return uniqueDates.slice(-2)
         },
+        /**
+         * sum of values in consumptions taken day before last
+         */
         beforeLast: function() {
             const value = this.consumptions
                 .filter(entry => entry.date == this.lastTwoDays[0])
@@ -32,6 +38,9 @@ export default {
 
             return value != null ? value : 'N/A'
         },
+        /**
+         * sum of values in consumptions taken last day
+         */
         last: function() {
             const value = this.consumptions
                 .filter(entry => entry.date == this.lastTwoDays[1])
@@ -41,6 +50,9 @@ export default {
 
             return value != null ? value : 'N/A'
         },
+        /**
+         * compares @last and @beforeLast values
+         */
         compared: function() {
             return this.last - this.beforeLast
         }

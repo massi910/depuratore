@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <!-- buttom section -->
+            <!-- widgets section -->
             <div class="collapse navbar-collapse p-2" style="width:100%" id="navbarNavAltMarkup">
                 <div class="container flex-column p-1 border border-white rounded">
                     <div 
