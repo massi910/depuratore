@@ -101,19 +101,23 @@ export default {
          */
         changeData: function(daysNumber, utenza)
         {
-            this.chartsData[utenza.id] = {
-                        labels: this.dates.filter((date) => 
+            let tempDate = this.dates.filter((date) => 
                         {
                             let today = new Date();
                             let diff = today.getTime() - new Date(date).getTime();
                             let diffDays = diff / (1000 * 3600 * 24);
                             return diffDays < daysNumber;
-                        }),
+                        })
+            this.chartsData[utenza.id] = {
+                        labels: tempDate,
                         datasets:[{
                             fill: false,
                             backgroundColor: this.colorArray[utenza.id],
                             label: utenza.name,
-                            data: this.consumptions.filter(e => e.id_item == utenza.id).map(e => e.cons)
+                            data: this.consumptions
+                                    .filter(e => e.id_item == utenza.id)
+                                    .filter(e => tempDate.includes(e.date))
+                                    .map(e => e.cons)
                         }]
                     }
         },
@@ -122,22 +126,26 @@ export default {
          * chart for all the available items
          */
         initData: function() {
-            var dataArray = {}
-            for (const utenza of this.utenze)
-            {
-                dataArray[utenza.id] = {
-                    labels: this.dates.filter((date) => 
+            let tempDate = this.dates.filter((date) => 
                         {
                             let today = new Date();
                             let diff = today.getTime() - new Date(date).getTime();
                             let diffDays = diff / (1000 * 3600 * 24);
                             return diffDays < 7;
-                        }),
+                        });
+            var dataArray = {}
+            for (const utenza of this.utenze)
+            {
+                dataArray[utenza.id] = {
+                    labels: tempDate,
                     datasets:[{
                         fill: false,
                         backgroundColor: this.colorArray[utenza.id],
                         label: utenza.name,
-                        data: this.consumptions.filter(e => e.id_item == utenza.id).map(e => e.cons)
+                        data: this.consumptions
+                                    .filter(e => e.id_item == utenza.id)
+                                    .filter(e => tempDate.includes(e.date))
+                                    .map(e => e.cons)
                     }]
                 }
             }

@@ -73,14 +73,16 @@ export default {
                         return diffDays < daysNumber;
                     }),
                 datasets: []
-            }
+            }            
             for (const utenza of this.utenze)
             {
                 data.datasets.push({
                     fill: false,
                     borderColor: this.colorArray[utenza.id],
                     label: utenza.name,
-                    data: this.consumptions.filter(e => e.id_item == utenza.id).map(e => e.cons)
+                    data: this.consumptions.filter(e => e.id_item == utenza.id)
+                                                    .filter(e => data.labels.includes(e.date))
+                                                    .map(e => e.cons)
                 })
             }
             this.consumptionsData = data;

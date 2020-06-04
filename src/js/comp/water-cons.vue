@@ -49,18 +49,21 @@ export default {
          */
         changeData: function(daysNumber)
         {
-            this.wcd = {
-                labels: this.water_cons.map(e => e.date).filter((date) => 
+            let tempDate = this.water_cons.map(e => e.date).filter((date) => 
                     {
                         let today = new Date();
                         let diff = today.getTime() - new Date(date).getTime();
                         let diffDays = diff / (1000 * 3600 * 24);
                         return diffDays < daysNumber;
-                    }),
+                    })
+            this.wcd = {
+                labels: tempDate,
                 datasets: [{
                     label: 'lt',
                     backgroundColor: '#f87979',
-                    data: this.water_cons.map(e => e.cons)
+                    data: this.water_cons
+                            .filter(e => tempDate.includes(e.date))
+                            .map(e => e.cons)
                 }]
             }
         }
