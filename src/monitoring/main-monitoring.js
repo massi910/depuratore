@@ -123,6 +123,7 @@ var app = new Vue({
             this.loadSections();
             this.loadPhases();
             this.loadConsumptions();
+            this.loadCons();
         },
         /**
          * Return true if the given

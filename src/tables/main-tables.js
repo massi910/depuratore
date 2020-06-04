@@ -12,7 +12,8 @@ new Vue({
             { name: "bdg_items", loadPath: "/php/items.php", sendPath: "/php/update-bdg_items.php" },
             { name: "bdg_sections", loadPath: "/php/sections.php", sendPath: "/php/update-bdg_sections.php" },
             { name: "phases", loadPath: "/php/load-phases.php", sendPath: "/php/update-phases.php" },
-            { name: "consumptions", loadPath: "/php/consumptions.php", sendPath: "/php/update-consumptions.php" }
+            { name: "consumptions", loadPath: "/php/consumptions.php", sendPath: "/php/update-consumptions.php" },
+            { name: "water cons", loadPath: "/php/water_cons.php", sendPath: "/php/update-water-cons.php" }
         ],
         columns: [],
         tableData: [],
