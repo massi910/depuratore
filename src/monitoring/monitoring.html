@@ -3,61 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoring</title>
-    
-    
+    <title>Document</title>
 </head>
 <body>
-    <div id="app" class="container-fluid">
-        <div class="row">
-            <!-- sidebar -->
-            <div class="col-lg-2 p-0">
-                <sidebar :menus="menus" :activemenu="activeMenu" 
-                    v-on:activation="setActiveMenu"
-                    v-on:refresh="reloadData"
-                ></sidebar>
-            </div>
+    <div id="app">
+        <spinner :show="!loaded"></spinner>
+        <sidebarpage
+            v-if="loaded"
+            :menu="menu" :activeMenu="menu[0]" v-on:refresh="loadData">
+            
+            <!-- UTENZE -->
+            <template v-slot:cntutenze="slotProps">
+                <utenze v-bind:utenze="utenze_app" v-bind:utenze_db="utenze_db" :sezioni="sections" 
+                v-on:alarm="slotProps.setActiveItemForName('Allarmi')"
+                v-on:write="sendItems"></utenze>
+            </template>
 
-            <!-- content -->
-            <div class="col-lg-10">
-                <!-- utenze -->
-                <menusection :section="menus.Utenze" v-if="isActive(menus.Utenze.name)">
-                    <utenze v-bind:utenze="utenze" :sezioni="sections" v-on:alarm="moveToWarnings"></utenze>
-                </menusection>
-                
-                <!-- allarmi -->
-                <menusection :section="menus.Allarmi" v-if="isActive(menus.Allarmi.name)">
-                    <cntalarms :utenze="utenze"></cntalarms>
-                </menusection>
+            <!-- ALLARMI -->
+            <template v-slot:navallarmi="slotProps">
+                <span class="badge bg-danger"
+                    v-show="slotProps.item.counter > 0"
+                > {{ slotProps.item.counter }} </span>
+            </template>
+            <template v-slot:cntallarmi="slotProps">
+                <cntalarms :utenze="utenze_app" :item="slotProps.item" v-on:write="sendItems"></cntalarms>
+            </template>
 
-                <!-- grafici -->
-                <menusection :section="menus.Grafici" v-if="isActive(menus.Grafici.name)">
-                    <cnttabs :regions="regions" :name="menus.Grafici.name">
-                        <template v-slot:reg1>
-                            <consumptions :utenze="utenze" :units="units" :consumptions="consumptions"></consumptions>
-                        </template>
-                        <template v-slot:reg2>
-                            <consumptions-items :utenze="utenze" :sezioni="sections" :units="units" :consumptions="consumptions"></consumptions-items>
-                        </template>
-                        <template v-slot:reg3>
-                            <water-cons :units="units" :water_cons="water_cons"></water-cons>
-                        </template>
-                        <template v-slot:reg4>
-                            <water-level :units="units" :water_level="water_level"></water-level>
-                        </template>
-                    </cnttabs>
-                </menusection>
+            <!-- FASI -->
+            <template v-slot:cntfasi="slotProps">
+                <cntphases 
+                    :phases="phases" :item="slotProps.item" 
+                    :utenze_db="utenze_db" :is-active="slotProps.isActive"></cntphases>
+            </template>
 
-                <!-- fasi -->
-                <menusection :section="menus.Fasi" v-if="isActive(menus.Fasi.name)">
-                    <cntphases :phases="phases" :menu="menus.Fasi"></cntphases>
-                </menusection>
+            <!-- GRAFICI -->
+            <template v-slot:cntgrafici>
+                <cnttabs :regions="regions" :name="'Grafici'">
+                    <template v-slot:reg1>
+                        <consumptions :utenze="utenze_app" :units="units" :consumptions="consumptions">
+                        </consumptions>
+                    </template>
+                    <template v-slot:reg2>
+                        <consumptions-items :utenze="utenze_app" :sezioni="sections" :units="units" 
+                            :consumptions="consumptions"></consumptions-items>
+                    </template>
+                    <template v-slot:reg3>
+                        <water-cons :units="units" :water_cons="water_cons"></water-cons>
+                    </template>
+                    <template v-slot:reg4>
+                        <water-level :units="units" :water_level="water_level"></water-level>
+                    </template>
+                </cnttabs>
+            </template>
+            <!-- widgets -->
+            <template v-slot:1widget>
+                <widget-active-items :utenze="utenze_app"></widget-active-items>
+            </template>
+            <template v-slot:2widget>
+                <widget-cons :consumptions="consumptions"></widget-cons>
+            </template>
+            <template v-slot:3widget>
+                <widget-water :water_cons="water_cons"></widget-water>
+            </template>
+            <template v-slot:4widget>
+                <widget-current-phase :phases="phases"></widget-current-phase>
+            </template>
 
-            </div>
-        </div>
+        </sidebarpage>
     </div>
     
     <script src="main-monitoring.js"></script>
-    
 </body>
 </html>

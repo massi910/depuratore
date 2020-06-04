@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div v-if="chartsData != null">
+        <!-- filtering toolbar -->
         <div class="btn-group btn-toolbar btn-group-toggle mb-3 pt-2 sticky-top">
             <button class="btn btn-default" :class="{ active : sezioneCorrente == undefined }" @click="sezioneCorrente = undefined">TUTTE</button>
             <button
@@ -11,9 +12,29 @@
                 {{sezione.name}}
             </button>
         </div>
-        <div class="card mb-3" v-for="utenza in utenzeAttive" :key="utenza.name">
-            <div class="card-header">{{utenza.name}}</div>
+        <!-- graphs cards -->
+        <div class="card mb-3" 
+            v-for="utenza in utenzeAttive" :key="utenza.name">
+            
+            <div class="card-header">
+                <h4 class="m-1"> {{ utenza.name }} </h4>
+            
+                <!-- interval selection -->
+                <div class="btn-group float-right" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-default btn-sm dropdown-toggle" 
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Seleziona intervallo
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" v-on:click="changeData(365, utenza)">Tutti</a>
+                        <a class="dropdown-item" v-on:click="changeData(31, utenza)">Ultimo mese</a>
+                        <a class="dropdown-item" v-on:click="changeData(7, utenza)">Ultima settimana</a>
+                    </div>
+                </div>
+            </div>
+            <!-- graph -->
             <barchart style="height: 45vh;" :chart-data="chartsData[utenza.id]"></barchart>
+
         </div>
     </div>
 </template>
@@ -33,6 +54,7 @@ export default {
     },
     data: function() {
         return {
+            chartsData: null,
             sezioneCorrente: undefined,
             colorArray: ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
                         '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
@@ -41,7 +63,11 @@ export default {
                         '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'],
         }
     },
-    computed: {
+    computed: 
+    {
+        /**
+         * active items filtered by current section (sezioneCorrente)
+         */
         utenzeAttive: function() {
             var alias = this;
             return this.utenze.filter(function(utenza) 
@@ -52,31 +78,83 @@ export default {
                 return utenza.section_id == alias.sezioneCorrente 
             })
         },
+        /**
+         * Set of all dates inside consumptions
+         */
         dates: function() {
-            return this.consumptions.map(e => e.date)
+            const d = new Set(this.consumptions.map(e => e.date))
+            return [...d]
+        }
+    },
+    methods: 
+    {
+        /**
+         * set current section (filters graphs by section)
+         */
+        setSezioneCorrente: function(sezione) {            
+            this.sezioneCorrente = sezione
         },
-        chartsData: function() {
+        /**
+         * Change the data according to the data filter
+         * In order to change the chart rendering, the 
+         * entire object should be re-assign
+         */
+        changeData: function(daysNumber, utenza)
+        {
+            let tempDate = this.dates.filter((date) => 
+                        {
+                            let today = new Date();
+                            let diff = today.getTime() - new Date(date).getTime();
+                            let diffDays = diff / (1000 * 3600 * 24);
+                            return diffDays < daysNumber;
+                        })
+            this.chartsData[utenza.id] = {
+                        labels: tempDate,
+                        datasets:[{
+                            fill: false,
+                            backgroundColor: this.colorArray[utenza.id],
+                            label: utenza.name,
+                            data: this.consumptions
+                                    .filter(e => e.id_item == utenza.id)
+                                    .filter(e => tempDate.includes(e.date))
+                                    .map(e => e.cons)
+                        }]
+                    }
+        },
+        /**
+         * Return the object data to fill the
+         * chart for all the available items
+         */
+        initData: function() {
+            let tempDate = this.dates.filter((date) => 
+                        {
+                            let today = new Date();
+                            let diff = today.getTime() - new Date(date).getTime();
+                            let diffDays = diff / (1000 * 3600 * 24);
+                            return diffDays < 7;
+                        });
             var dataArray = {}
             for (const utenza of this.utenze)
             {
                 dataArray[utenza.id] = {
-                    labels: this.dates,
+                    labels: tempDate,
                     datasets:[{
                         fill: false,
                         backgroundColor: this.colorArray[utenza.id],
                         label: utenza.name,
-                        // TO-DO: 0 = valore per testare il funzionamento -> sarà null
-                        data: this.consumptions.map(e => this.dates.includes(e.date) && e.id_item == utenza.id ? e.cons : 12 )
+                        data: this.consumptions
+                                    .filter(e => e.id_item == utenza.id)
+                                    .filter(e => tempDate.includes(e.date))
+                                    .map(e => e.cons)
                     }]
                 }
             }
             return dataArray
         }
     },
-    methods: {
-        setSezioneCorrente: function(sezione) {            
-            this.sezioneCorrente = sezione
-        }
+    mounted()
+    {
+        this.chartsData = this.initData()
     }
 }
 </script>

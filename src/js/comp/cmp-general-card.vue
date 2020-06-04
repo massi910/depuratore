@@ -1,5 +1,5 @@
 <template>
-    <div class="item-card border-left border-primary shadow my-4">
+    <div class="item-card shadow my-4 card">
         <div class="view">        
             
             <!-- container -->   
@@ -27,3 +27,10 @@ export default {
     }
 }
 </script>
+
+<style>
+    .card
+    {
+        border-left-width: 6px;
+    }
+</style>
