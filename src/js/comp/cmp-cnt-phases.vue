@@ -7,14 +7,40 @@
             :id="buildPhaseId(phase.id)"
             >
             <template v-slot:title="props">
-                <div>
-                    <h2> {{ props.carditem.name }} </h2>
+                <div class="container">
+                    <div>
+                        <h2 class=""> 
+                            {{ props.carditem.name }}
+                        </h2>
+                    </div>
                 </div>
-                
             </template>
 
             <template v-slot:body="props">
-                {{ props.carditem.description }}
+                <div class="container">
+                    {{ props.carditem.description }}
+                    <div class="mt-2">
+                        <a class="btn btn-default btn-sm ml-0" data-toggle="collapse" 
+                        :href="'#collapseExample'+buildPhaseId(phase.id)"
+                            role="button" aria-expanded="false" :aria-controls="'collapseExample'+buildPhaseId(phase.id)">
+                            Utenze coinvolte
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="collapse" :id="'collapseExample'+buildPhaseId(phase.id)">
+                    <div class="container mt-2">
+                        <div class="border p-2">
+                            <ul class="pl-3 pt-0 pb-0">
+                                <li
+                                    v-for="item in getInvolvedItems(props.carditem.id)"
+                                    :key="item.id">
+                                    {{ item.name }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </template>
 
             <template v-slot:mask="props">
@@ -29,7 +55,16 @@
 
 <script>
 import generalcard from './cmp-general-card'
+import Vue from 'vue'
 import $ from 'jquery'
+import 'mdbootstrap/css/mdb.min.css'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+library.add(faAngleDown)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /**
  * Container for depuration phases
@@ -42,8 +77,7 @@ export default {
     data: function () 
     {
         return{
-            activePhase: this.phases[0],
-            scrollPosition: Object,
+            activePhase: null,
         }
     },
     props:
@@ -53,54 +87,59 @@ export default {
             type: Array,
             default: []
         },
-        // container menu
-        menu: Object
+        // container item menu
+        item: Object,
+        // if true, this component is currently showing
+        isActive: Boolean,
+        utenze_db: Array
     },
     watch:
     {
-        // what phases and eventually update active phase
-        phases: 
+        phases:
         {
+            // update the active phase
             handler: function () {
                 this.activePhase = this.getFirstActive();
             },
             deep: true,
             immediate: true
         },
-        // watch current active phase and eventually scroll to it
         activePhase:
         {
-            handler: function ()
-            {
-                setTimeout(() => {
-                        var temp = this.buildPhaseId(this.activePhase.id);
-                        this.scrollToItem(temp);
-                    },
-                    1000);
-                    this.saveCurrentPosition();
-                
-            },
-            deep: true,
-            immediate: true
+            // update the scroll position
+            handler: function () {
+                this.updateScrollPosition();
+            }
         },
-        // watch the scroll position to change menu value
-        scrollPosition:
+        isActive:
         {
-            handler: function (e) {
-                this.menu.position = this.scrollPosition;
+            // update the scroll position
+            // when this component is displayed
+            handler: function () {
+                if (this.isActive)
+                    this.updateScrollPosition();
             }
         }
     },
     methods:
     {
         /**
-         * save the current position
+         * Set the menu item scroll position.
+         * The first active phase will be on top
          */
-        saveCurrentPosition: function () {
-            setTimeout(() => {
-                this.scrollPosition = window.pageYOffset;
-                },
-                2000);
+        updateScrollPosition: function () {
+            if (this.activePhase == null)
+                return;
+            var temp = this.buildPhaseId(this.activePhase.id);
+            this.item.scrollPosition = this.getElPosition(temp);
+        },
+        getElPosition: function(id)
+        {
+            var temp = $('#' +id);
+            if (!temp.length)
+                return 0;
+            else
+                return temp.offset().top-24
         },
         /**
          * Scroll to given id element
@@ -113,7 +152,7 @@ export default {
             if (!temp.length)
                 return;
             $('html, body').animate({
-                scrollTop: temp.offset().top-10
+                scrollTop: temp.offset().top-24
             }, 500);
         },
         /**
@@ -135,7 +174,32 @@ export default {
                     return this.phases[i];
             
             return this.phases[0];
+        },
+        getInvolvedItems(phaseId)
+        {
+            return this.utenze_db.filter((item) =>
+            {
+                return item.phase == phaseId;
+            })
         }
+    },
+    mounted()
+    {
+        // set the scroll position when all phases are rendered
+        var instance = this;
+        setTimeout(function(){
+            instance.updateScrollPosition()
+            }, 2000);
+        
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+          })
     }
 }
 </script>
+
+<style scoped>
+    .mask {
+        pointer-events:none;
+    }
+</style>

@@ -69,12 +69,8 @@ var calcCardSticky = (parseInt(parentTopPadding.replace(/px/, "")) + navBarHeigh
 $(':root').css('--navBar-height', calcCardSticky + "px");   // set global property
 
 
-////////////////////////
-////////////////////////    TODO DB
-////////////////////////
-
 // money currency
-var usedCurrency = "€"; // todo DB
+var usedCurrency = "€";
 
 ////////////////////////
 ////////////////////////
@@ -155,5 +151,10 @@ $(document).ajaxStop(function () {
     var currentPrice = new models.Money(basePrice.value);
     $('#base-price').html(basePrice.toString());
     $('#current-price').html(currentPrice.toString());
+
 })
 
+$('#carrello').click(function()
+{
+    alert("Configurazione aggiunta al carrello!\nprezzo totale: " +evalPrice(pvSectionsMap).toString())
+})

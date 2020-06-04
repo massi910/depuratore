@@ -14,6 +14,11 @@
     font-size: 3rem;
     font-family: Impact, Charcoal, sans-serif;
     color: black;
+
+}
+.logo:hover
+{
+    color: #343a40;
 }
 .top-header-info
 {
@@ -49,21 +54,6 @@
     .card-alarm
     {
         min-width: auto;
-    }
-}
-
-
-/* sidebar */
-#sidebar
-{
-    min-height: 100vh;
-}
-
-@media (max-width: 992px)
-{ 
-    #sidebar
-    {
-        min-height: auto;
     }
 }
 

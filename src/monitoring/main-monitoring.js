@@ -2,9 +2,8 @@ import 'mdbootstrap/css/mdb.min.css'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../style/general.css'
-import sidebar from '../js/comp/cmp-sidebar'
+import sidebarpage from '../js/comp/cmp-sidebarpage'
 import cntalarms from '../js/comp/cmp-cnt-alarms'
-import menusection from '../js/comp/cmp-menusection'
 import utenze from '../js/comp/utenze'
 import cntphases from '../js/comp/cmp-cnt-phases'
 import cnttabs from '../js/comp/cmp-tabs'
@@ -12,52 +11,59 @@ import consumptions from '../js/comp/consumptions'
 import consumptionsItems from '../js/comp/consumptions-items'
 import waterCons from '../js/comp/water-cons'
 import waterLevel from '../js/comp/water-level'
+import widgetActiveItems from '../js/comp/cmp-widget-active-items'
+import widgetCons from '../js/comp/cmp-widget-cons'
+import widgetWater from '../js/comp/cmp-widget-water'
+import widgetCurrentPhase from '../js/comp/cmp-widget-current-phase'
+import spinner from '../js/comp/spinner'
 import axios from 'axios'
 import Vue from 'vue'
 import $ from 'jquery'
 
-
-
-
 var app = new Vue({
-    el: '#app',
     components:
     {
-        sidebar,
+        spinner,
+        sidebarpage,
         cntalarms,
-        menusection,
         utenze,
         cntphases,
         cnttabs,
         consumptions,
         consumptionsItems,
         waterCons,
-        waterLevel
+        waterLevel,
+        widgetActiveItems,
+        widgetCons,
+        widgetWater,
+        widgetCurrentPhase
     },
-    data: 
+    el: '#app',
+    data:
     {
-        interval: Object,
-        activeMenu: "Allarmi",
-        menus:
-        {
-            'Utenze': { name: "Utenze", description: "Utenze monitorabili", counter: 0, position: 0 },
-            'Allarmi': { name: "Allarmi", description: "Controllo allarmi", counter: 0, position: 0  },
-            'Fasi': { name: "Fasi", description: "Fasi di depurazione", counter: 0, position: 0 },
-            'Grafici': { name: "Grafici", description: "Grafici dei consumi", counter: 0, position: 0 }
-        },
+        menu:
+        [
+            { name: "Utenze" },
+            { name: "Allarmi" },
+            { name: "Fasi" },
+            { name: "Grafici" },
+        ],
         regions: [ 
-            {id: 'reg1', name: 'Consumo elettrico'},
-            {id: 'reg2', name: 'Consumo elettrico / utenza'},
+            {id: 'reg1', name: 'Consumo elettrico generale'},
+            {id: 'reg2', name: 'Consumo elettrico per utenza'},
             {id: 'reg3', name: 'Consumo acqua'},
             {id: 'reg4', name: 'Livello acqua'}
         ],
-        utenze: [],
+        utenze_app: [],
+        utenze_db: [],
         sections: [],
         units: [],
         consumptions: [],
         phases: [],
         water_cons: [],
         water_level: [],
+        extUpdate: false,
+        loaded: false
     },
     methods:
     {
@@ -65,25 +71,37 @@ var app = new Vue({
         ////////// data up/download ////////////
         ////////////////////////////////////////
         // Write item to db
-        sendItems: function ()
+        sendItems: async function ()
         {
             axios
-                .post("/php/update-mnt_items.php", this.utenze)
-                .then(response => console.log(response))
+                .post("/php/update-mnt_items.php", this.utenze_app)
+                .then(() => this.loadItems())
                 .catch(error => console.log(error));
         },
-        // Load items from db
-        loadItems: function () 
-        {
-            axios
+        /**
+         * Load utenze in utenze_db
+         */
+        loadItems: async function ()
+        {   
+            return axios
                 .get('/php/mnt_items.php')
-                .then(response => (this.utenze = response.data))
+                .then(response => 
+                    {
+                        this.utenze_db = response.data
+                        if (this.utenze_app.length == 0)
+                            this.utenze_app = JSON.parse(JSON.stringify(this.utenze_db))
+                
+                        // check if the utenze just loaded are equal to the utenze in the app
+                        let equal = this.utenzeEquals(this.utenze_db, this.utenze_app);
+                        if (!equal)
+                            this.utenze_app = JSON.parse(JSON.stringify(this.utenze_db));
+                    })
                 .catch(error => console.log(error));
         },
         // load items section from db
         loadSections: function () 
         {
-            axios
+            return axios
                 .get('/php/mnt_sections.php')
                 .then(response => (this.sections = response.data))
                 .catch(error => console.log(error))
@@ -91,104 +109,104 @@ var app = new Vue({
         // load depuration phases from db
         loadPhases: function ()
         {
-            axios
+            return axios
                 .get('/php/load-phases.php')
                 .then(response => (this.phases = response.data))
                 .catch(error => console.log(error))
         },
-        /** handler for activation menu change */
-        setActiveMenu: function (name) 
-        {
-            this.activeMenu = name; // set active menu
-            this.setScrollPosition(name);   // set scrolling position
-        },
-        /**
-         * Set the scroll position according to
-         * the given menu
-         * @param {String} menu 
-         */
-        setScrollPosition: function (menu) {
-            $('html, body').animate({
-                scrollTop: this.menus[menu].position
-            }, 700);
-        },
-        moveToWarnings: function() {            
-            this.activeMenu = this.menus.Allarmi.name;
-        },
         /**
          * Reload data from db
          */
-        reloadData: function () 
-        {
+        loadData: function () 
+        {            
             this.loadItems();
             this.loadSections();
             this.loadPhases();
+            this.loadConsumptions();
+            this.loadCons();
         },
-    },
-    mounted()
-    {
-        /** get saved active menu */
-        if (localStorage.activeMenu)
-            this.activeMenu = localStorage.activeMenu;
-    },
-    watch:
-    {
-        utenze:
+        /**
+         * Return true if the given
+         * arrays are equals.
+         * 
+         * @param {Array} ut_db utenze_db
+         * @param {Array} ut_app utenze_app
+         */
+        utenzeEquals: function (ut_db, ut_app) 
         {
-            handler: function () {                
-                this.sendItems();
-            },
-            deep: true
+            for (let i = 0; i < ut_db.length; i++)
+            {
+                let el_db = ut_db[i]
+                let el_app = ut_app[i]
+                let props_db = Object.keys(el_db)
+                let props_app = Object.keys(el_app)
+                for (let iProp = 0; iProp < props_db.length; iProp++)
+                {   
+                    if (el_db[props_db[iProp]] != el_app[props_app[iProp]])
+                        return false;
+                }
+            }
+            return true;
         },
-        // whenever activeAlarmCounter changes, this function will run
-        activeAlarmCounter: function () 
+
+        loadUnits()
         {
-            this.menus.Allarmi.counter = this.activeAlarmCounter;
+            return axios
+                .get('/php/units.php')
+                .then(response => this.units = response.data)
+                .catch(error => console.log(error))
         },
-        /** store last active menu to the client machine */
-        activeMenu(newValue)
+
+        loadConsumptions()
         {
-            localStorage.activeMenu = newValue;
+            return axios
+                .get('/php/consumptions.php')
+                .then(response => this.consumptions = response.data)
+                .catch(error => console.log(error))
+        },
+
+        loadCons()
+        {
+            return axios
+                .get('/php/water_cons.php')
+                .then(response => this.water_cons = response.data)
+                .catch(error => console.log(error))
+        },
+        loadWaterLevel()
+        {
+            return axios
+                .get('/php/water_level.php')
+                .then(response => this.water_level = response.data)
+                .catch(error => console.log(error))
+        },
+
+        // starting init
+        fetchItems()
+        {
+            let alias = this;
+            axios.all([
+                this.loadItems(),
+                this.loadSections(),
+                this.loadPhases(),
+                this.loadCons(),
+                this.loadConsumptions(),
+                this.loadUnits(),
+                this.loadWaterLevel()
+            ])
+            .then(axios.spread(function (acct, perms)
+            {
+                alias.loaded = true
+            }));
         }
     },
-    computed:
+    created: async function()
     {
-        isActive: function ()
-        {
-            return (name) => {   return this.activeMenu == name; }
-        },
-        /** active alarms counter */
-        activeAlarmCounter: function ()
-        {
-            var count = 0;
-            this.utenze.forEach(utenza => {
-                if (utenza.b_alarm == true)
-                    count++;
-            });
-            return count;
-        },
-    },
-    created: async function() 
-    {
-        this.loadItems();
-        this.loadSections();
-        this.loadPhases();
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+          })
+
+        this.fetchItems()
         
-        axios
-            .get('/php/units.php')
-            .then(response => this.units = response.data)
-            .catch(error => console.log(error))
-
-        axios.get('/php/consumptions.php')
-            .then(response => this.consumptions = response.data)
-            .catch(error => console.log(error))
-
-        axios.get('/php/water_cons.php')
-            .then(response => this.water_cons = response.data)
-            .catch(error => console.log(error))
-
-        axios.get('/php/water_level.php')
-            .then(response => this.water_level = response.data)
-            .catch(error => console.log(error))
+        
     }
-});
+})
