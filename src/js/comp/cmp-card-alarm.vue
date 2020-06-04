@@ -52,9 +52,7 @@ export default {
     methods:
     {
         deActiveAlarm: function(event)
-        {
-            console.log("write");
-            
+        {            
             this.utenza.b_alarm = false;
             this.$emit('write');
         }
