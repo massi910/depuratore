@@ -44,7 +44,7 @@
                     <div 
                         v-for="index in maxWidget"
                         :key="index"
-                        class="w-100 text-right bg-secondary rounded p-1 mb-1"
+                        class="w-100 text-right bg-secondary rounded p-1 mb-1 no-pointer-activity"
                         >
                         <slot :name="index+'widget'"></slot>
                     </div>
@@ -249,6 +249,11 @@ export default
 </script>
 
 <style>
+.no-pointer-activity
+{
+    pointer-events:none;
+}
+
 #sidebar
 {
     min-height: 100vh;
