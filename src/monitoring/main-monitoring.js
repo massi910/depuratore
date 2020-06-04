@@ -122,6 +122,7 @@ var app = new Vue({
             this.loadItems();
             this.loadSections();
             this.loadPhases();
+            this.loadConsumptions();
         },
         /**
          * Return true if the given

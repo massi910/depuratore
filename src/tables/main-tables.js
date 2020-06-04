@@ -11,7 +11,8 @@ new Vue({
             { name: "mnt_sections", loadPath: "/php/mnt_sections.php", sendPath: "/php/update-mnt_sections.php" },
             { name: "bdg_items", loadPath: "/php/items.php", sendPath: "/php/update-bdg_items.php" },
             { name: "bdg_sections", loadPath: "/php/sections.php", sendPath: "/php/update-bdg_sections.php" },
-            { name: "phases", loadPath: "/php/load-phases.php", sendPath: "/php/update-phases.php" }
+            { name: "phases", loadPath: "/php/load-phases.php", sendPath: "/php/update-phases.php" },
+            { name: "consumptions", loadPath: "/php/consumptions.php", sendPath: "/php/update-consumptions.php" }
         ],
         columns: [],
         tableData: [],
@@ -46,6 +47,13 @@ new Vue({
                 this.options.editableColumns = Object.keys(response.data[0])
             })
             .catch(error => console.log(error));
+        },
+
+        updateSingleTuple: function(tuple) {
+            axios
+                .post(this.selectedTable.sendPath, [tuple])
+                .then(response => console.log(response))
+                .catch(error => console.log(error));
         }
     },
     watch:
@@ -57,13 +65,13 @@ new Vue({
             },
             deep: true
         },
-        tableData: 
+/*      tableData: 
         {
             handler: function (newVal, oldVal)
             {               
                 this.send();
             },
             deep: true
-        }   
+        }    */
     },
 });

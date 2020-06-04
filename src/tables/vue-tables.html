@@ -34,7 +34,7 @@
                     </span>
                     <span v-else>
                     <input type="text" v-model="row[col]">
-                    <button type="button" @click="update(row[col]); setEditing(false)">Submit</button>
+                    <button type="button" @click="update(row[col]); setEditing(false); updateSingleTuple(row)">Submit</button>
                     <button type="button" @click="revertValue(); setEditing(false)">Cancel</button>        
                     </span>
                 </div>
