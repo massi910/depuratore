@@ -10,7 +10,7 @@
         <spinner :show="!loaded"></spinner>
         <sidebarpage
             v-if="loaded"
-            :menu="menu" :activeMenu="menu[0]" v-on:refresh="loadData">
+            v-bind:menu="menu" :activeMenu="menu[0]" v-on:refresh="loadData">
             
             <!-- UTENZE -->
             <template v-slot:cntutenze="slotProps">
